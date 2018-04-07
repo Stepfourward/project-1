@@ -1,0 +1,72 @@
+page-profile {
+    #ppic {
+        border-radius: 50%;
+        position: relative;
+        top: 20px;
+        
+        width: 90px;
+        height: 90px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #box {
+        height: 200px;
+        width: 100%;
+        background: rebeccapurple;
+    }
+    #name {
+        font-weight: bold;
+        font-size: 17px;
+        color: white;
+        text-align: center;
+    }
+    #loc {
+        text-align: center;
+        font-size: 15px;
+        color: white;
+        position: relative;
+        top: 1px;
+    }
+    .smallbox {
+        background: #E3E0E4;
+        width: 100%;
+        height: 10%;
+    }
+    .bigbox {
+        background: white;
+        width: 100%;
+        height: 20%;
+
+    }
+    ion-label {
+        color: grey;
+        font-size: 11px;
+    }
+    .text {
+        color: black;
+        font-size: 12px;
+    }
+    .up {
+        font-weight: bold;
+    }
+    .down {
+        font-weight: normal;
+
+    }
+    ion-item-divider {
+        height: 4px;
+        width: 100%;
+    }
+    ion-item {
+        height: 8px;
+        width: 100%; 
+    }
+    ion-list {
+        height: 52%;
+    }
+    .toolbar-background {
+        background-color: white;
+      }
+
+}

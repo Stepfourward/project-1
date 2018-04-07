@@ -1,0 +1,23 @@
+page-feeds {
+    .toolbar-background {
+        background-color: white;
+    }
+    .label {
+	
+        font-weight: bold;
+        font-size: 12px;
+        padding-right: 40px;
+        float: left;
+    }
+    .des {
+        color: grey;
+        font-size: 12px;
+        word-wrap: break-word;
+        text-align: left;
+        
+    }
+    table, th, td {
+        border: 3px solid white;
+    }
+    
+}

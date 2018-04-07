@@ -1,0 +1,53 @@
+page-home {
+
+#sign {
+	
+	position: relative;
+	left:220px;
+	font-size: 15px;
+	color: #B200FF;
+}
+
+ion-img {
+	position: relative;
+	left: 25px;
+	top: 70px;
+}
+
+#desc1 {
+	position: relative;
+	text-align: center;
+	top: 80px;
+	font-size: 18px;
+}
+
+#desc2 {
+	left: 50px;
+	font-size: 10px;
+	position: relative;
+	top: 250px;
+}
+#sign2 {
+	position: relative;
+	top: 265px;
+	left: 60px;
+	color: #778899;
+}
+
+#linklogo {
+	position: relative;
+	top: 170px;
+	left: 50px;
+}
+ion-content{
+	background-color: white;
+}
+#linkimg {
+	width: 200px;
+	height: 35px;
+}
+.no-scroll .scroll-content{
+	overflow: hidden;
+}
+
+}

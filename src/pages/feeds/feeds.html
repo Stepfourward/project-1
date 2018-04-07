@@ -1,0 +1,43 @@
+
+<ion-header>
+  <ion-toolbar>
+  	
+  	<ion-searchbar searchbar-ios-input-search-icon-color="purple" placeholder="Search for jobs"></ion-searchbar>
+  	<ion-buttons end>
+  		<button ion-button clear style="color: #9E00FF;">Filter</button>
+  	</ion-buttons>	
+  </ion-toolbar>
+  </ion-header>
+
+
+<ion-content>
+  
+	<ion-card (click)="openPage()" >
+		<img src="assets/imgs/lap.jpg">
+		<ion-card-content>
+			<table>
+				<tr>
+					<td class="label">Location</td>
+					<td class="des">Canada</td>
+				</tr>
+				<tr>
+					<td class="label">Type</td>
+					<td class="des">Full-time</td>
+				</tr>
+				<tr>
+					<td class="label">salary</td>
+					<td class="des">Not specified</td>
+				</tr>
+				<tr>
+					<td class="label">Description</td>
+					<td class="des">this is des this is des this is des this is des</td>
+				</tr>
+				<tr>
+					<td class="label">Source</td>
+					<td class="des"><p style="color: purple;font-weight: bold;">Monster</p></td>
+				</tr>
+			</table>
+		</ion-card-content>
+	</ion-card>
+
+</ion-content>
