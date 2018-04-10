@@ -1,3 +1,37 @@
 page-job-detail {
 
+    
+    #container {
+        position: relative;
+        color: white;
+
+    }
+    #imgbot1 {
+        position: absolute;
+        top: 150px;
+        left: 5px;
+        font-size: 18px;
+        font-weight: 500;
+
+    }
+    #imgbot2 {
+        position: absolute;
+        top: 170px;
+        left: 5px;
+        font-size: 13px;
+        font-weight: 300;
+
+    }
+    #imgbot3 {
+        position: absolute;
+        top: 185px;
+        left: 5px;
+        font-size: 11px;
+        
+    }
+    .button {
+        width: 48%;
+        height: 40px;
+
+    }
 }
