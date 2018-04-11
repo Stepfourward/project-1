@@ -10,4 +10,7 @@ import { JobDetailPage } from './job-detail';
     IonicPageModule.forChild(JobDetailPage),
   ],
 })
-export class JobDetailPageModule {}
+export class JobDetailPageModule {
+  
+
+}

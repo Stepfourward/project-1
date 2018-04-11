@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HttpModule } from '@angular/http';
-
+import { IonTextAvatar } from 'ionic-text-avatar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -17,8 +17,10 @@ import { EditinfoPage } from '../pages/editinfo/editinfo';
 import { SlidesPage } from '../pages/slides/slides';
 import { JobPage } from '../pages/job/job';
 import { ChatBoxPage } from '../pages/chat-box/chat-box';
-
 import { JobDetailPage } from '../pages/job-detail/job-detail';
+import { AppliedPage } from '../pages/applied/applied';
+import { FailedPage } from '../pages/failed/failed';
+import { SavedPage } from '../pages/saved/saved';
 
 
 
@@ -34,8 +36,11 @@ import { JobDetailPage } from '../pages/job-detail/job-detail';
     SlidesPage,
     JobPage,
     ChatBoxPage,
-    JobDetailPage
-    
+    JobDetailPage,
+    AppliedPage,
+    FailedPage,
+    SavedPage,
+    IonTextAvatar
     
     
   ],
@@ -43,6 +48,7 @@ import { JobDetailPage } from '../pages/job-detail/job-detail';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
+    
     
 
   ],
@@ -58,7 +64,10 @@ import { JobDetailPage } from '../pages/job-detail/job-detail';
     SlidesPage,
     JobPage,
     ChatBoxPage,
-    JobDetailPage
+    JobDetailPage,
+    AppliedPage,
+    FailedPage,
+    SavedPage
     
     
     
