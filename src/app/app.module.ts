@@ -21,6 +21,7 @@ import { JobDetailPage } from '../pages/job-detail/job-detail';
 import { AppliedPage } from '../pages/applied/applied';
 import { FailedPage } from '../pages/failed/failed';
 import { SavedPage } from '../pages/saved/saved';
+import { ModalPage } from '../pages/modal/modal';
 
 
 
@@ -40,7 +41,8 @@ import { SavedPage } from '../pages/saved/saved';
     AppliedPage,
     FailedPage,
     SavedPage,
-    IonTextAvatar
+    IonTextAvatar,
+    ModalPage
     
     
   ],
@@ -67,7 +69,8 @@ import { SavedPage } from '../pages/saved/saved';
     JobDetailPage,
     AppliedPage,
     FailedPage,
-    SavedPage
+    SavedPage,
+    ModalPage
     
     
     

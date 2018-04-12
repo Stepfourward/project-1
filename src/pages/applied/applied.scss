@@ -5,8 +5,12 @@ page-applied {
     .avatar{
         background-color: #C0C0C0;
     }
-    .cont {
-        position: relative;
-        top: 30px;
+    .no-scroll .scroll-content {
+        overflow: hidden;
     }
+    .check {
+        position: relative;
+        top: 5px;
+    }
+
 }

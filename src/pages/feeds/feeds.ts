@@ -1,7 +1,9 @@
 import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 import { JobDetailPage } from '../job-detail/job-detail';
+import { ModalPage } from '../modal/modal';
 /**
  * Generated class for the FeedsPage page.
  *
@@ -16,7 +18,7 @@ import { JobDetailPage } from '../job-detail/job-detail';
 })
 export class FeedsPage {
   
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
     
     }
 
@@ -28,6 +30,13 @@ export class FeedsPage {
 
   openPage() {
     this.navCtrl.push(JobDetailPage);
+  }
+  showAlert() {
+    let modal = this.modalCtrl.create(ModalPage);
+    modal.present();
+    
+
+
   }
   
 }
