@@ -1,5 +1,19 @@
 page-job-detail {
+    ion-header {
+        
+        .toolbar {
+          position: absolute;
+      
+          .toolbar-background {
+            background: transparent;
 
+          }
+          
+          .toolbar-title {
+            color: black;
+          }
+        }
+      }
     
     #container {
         position: relative;
@@ -87,5 +101,7 @@ page-job-detail {
     }
     
     
+    
+       
 
 }

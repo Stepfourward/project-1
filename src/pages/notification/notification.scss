@@ -1,13 +1,8 @@
 page-notification {
 
-#notiimg {
-	
-	width: 50px;
-	heigth: 50px;
 
-}
 #caption {
-	color: #B200FF;
+	color: #9012FE;
 	font-size: 18px;
 	position: relative;
 	top: 185px;
@@ -35,8 +30,18 @@ page-notification {
 	position: relative;
 	top: 240px;
 	left: 70px;
-	background-color: #9400D3;
+	background-color: #9D2EFE;
 	width: 103px;
+
+}
+.notifimg {
+	position: fixed;
+	top: 80px;
+	width: 40%;
+	height: 40%;
+	left: 0;
+	right: 0;
+	margin: auto;
 
 }
 

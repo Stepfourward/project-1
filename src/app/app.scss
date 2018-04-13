@@ -9,3 +9,6 @@ ion-modal {
     top: 73px;
     
 }
+[scrollbar-y-auto] .scroll-content {
+    overflow-y: auto !important;
+  }

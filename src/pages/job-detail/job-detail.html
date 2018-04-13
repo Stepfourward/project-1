@@ -1,7 +1,21 @@
-
-<ion-content id="content">
+<ion-header no-border>
+  <ion-toolbar>
+      <ion-buttons start>
+          <button ion-button icon-only style="color: #9012FE;">
+              <ion-icon name="ios-arrow-dropdown"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-buttons right>
+          <button ion-button icon-only style="color: #9012FE;" (click)="moreOptions()">
+              <ion-icon name="ios-more"></ion-icon>
+          </button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content id="content" scrollbar-y-auto>
+  <div class="sticky"></div>
   <div id="container">
-    <img src="assets/imgs/lap.jpg" style="height: 210px; width: 100%;">
+    <img src="assets/imgs/lap.jpg" style="height: 210px;width: 100%">
     <div id="imgbot1">Pleasant solutions</div>
     <div id="imgbot2">Software developer/Programmer</div>
     <div id="imgbot3">opportunity: intelligent and great</div>

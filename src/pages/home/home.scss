@@ -3,20 +3,21 @@ page-home {
 #sign {
 	
 	position: relative;
-	left:220px;
+	
+	float: right;
 	font-size: 15px;
-	color: #B200FF;
+	color: #9012FE;
 }
 
 ion-img {
 	position: relative;
-	left: 25px;
+	
 	top: 70px;
 }
 
 #desc1 {
 	position: relative;
-	text-align: center;
+	
 	top: 80px;
 	font-size: 18px;
 }
@@ -29,7 +30,7 @@ ion-img {
 }
 #sign2 {
 	position: relative;
-	top: 265px;
+	top: 255px;
 	left: 60px;
 	color: #778899;
 }
