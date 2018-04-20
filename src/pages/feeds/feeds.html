@@ -11,33 +11,34 @@
 
 
 <ion-content>
-  
-	<ion-card (click)="openPage()" >
-		<img src="assets/imgs/lap.jpg">
-		<ion-card-content>
-			<table>
-				<tr>
-					<td class="label">Location</td>
-					<td class="des">Canada</td>
-				</tr>
-				<tr>
-					<td class="label">Type</td>
-					<td class="des">Full-time</td>
-				</tr>
-				<tr>
-					<td class="label">salary</td>
-					<td class="des">Not specified</td>
-				</tr>
-				<tr>
-					<td class="label">Description</td>
-					<td class="des">this is des this is des this is des this is des</td>
-				</tr>
-				<tr>
-					<td class="label">Source</td>
-					<td class="des"><p style="color: purple;font-weight: bold;">Monster</p></td>
-				</tr>
-			</table>
-		</ion-card-content>
-	</ion-card>
-
+	<div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack">
+		<ion-card #mycards1 swing-card class="td-card">
+			<img src="assets/imgs/lap.jpg" (click)="openPage()">
+			<ion-card-content>
+				<table>
+					<tr>
+						<td class="label">Location</td>
+						<td class="des">Canada</td>
+					</tr>
+					<tr>
+						<td class="label">Type</td>
+						<td class="des">Full-time</td>
+					</tr>
+					<tr>
+						<td class="label">salary</td>
+						<td class="des">Not specified</td>
+					</tr>
+					<tr>
+						<td class="label">Description</td>
+						<td class="des">this is des this is des this is des this is des</td>
+					</tr>
+					<tr>
+						<td class="label">Source</td>
+						<td class="des"><p style="color: purple;font-weight: bold;">Monster</p></td>
+					</tr>
+				</table>
+			</ion-card-content>
+		</ion-card>
+	</div>
+		
 </ion-content>

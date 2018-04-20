@@ -21,5 +21,8 @@ export class ModalPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPage');
   }
+  filter() {
+    this.navCtrl.pop();
+  }
 
 }

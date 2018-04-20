@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
-
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 /**
  * Generated class for the JobDetailPage page.
  *
@@ -15,7 +15,7 @@ import { IonicPage, NavController, NavParams, ActionSheetController } from 'ioni
 })
 export class JobDetailPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController,private nativePageTransitions: NativePageTransitions) {
   }
 
   ionViewDidLoad() {
@@ -47,6 +47,16 @@ export class JobDetailPage {
     });
     actionSheet.present();
 
+  }
+  minimizePage() {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 200,
+      slowdownfactor: -1,
+      iosdelay: 50,
+    };
+    this.nativePageTransitions.slide(options);
+    this.navCtrl.pop();
   }
 
 }

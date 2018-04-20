@@ -1,3 +1,5 @@
+import { FormsModule } from '@angular/forms';
+import { MbscModule } from '@mobiscroll/angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -6,6 +8,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HttpModule } from '@angular/http';
 import { IonTextAvatar } from 'ionic-text-avatar';
+import { SwingModule } from 'angular2-swing';
+import { IonicSwipeAllModule } from 'ionic-swipe-all';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+
+
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -42,15 +49,19 @@ import { ModalPage } from '../pages/modal/modal';
     FailedPage,
     SavedPage,
     IonTextAvatar,
-    ModalPage
+    ModalPage,
     
     
   ],
-  imports: [
+  imports: [ 
+    FormsModule, 
+    MbscModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    
+    SwingModule,
+    IonicSwipeAllModule,
+   
     
 
   ],
@@ -79,6 +90,7 @@ import { ModalPage } from '../pages/modal/modal';
     StatusBar,
     SplashScreen,
     Geolocation,
+    NativePageTransitions,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
