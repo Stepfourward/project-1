@@ -11,8 +11,8 @@
 
 
 <ion-content>
-	<div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack">
-		<ion-card #mycards1 swing-card class="td-card">
+	<div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack" >
+		<ion-card #mycards1 swing-card >
 			<img src="assets/imgs/lap.jpg" (click)="openPage()">
 			<ion-card-content>
 				<table>

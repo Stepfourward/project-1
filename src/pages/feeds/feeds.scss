@@ -21,10 +21,9 @@ page-feeds {
     }
     .fade {
         -webkit-transition: 0.2s opacity linear;
-        transition: 0.2s opacity linear;
-        opacity: 0;
+        transition: 0.2s opacity linear;        opacity: 0;
       }
-      rate {
+      .rate {
         width: 70px;
         height: 70px;
         border-radius: 70px;
@@ -44,6 +43,9 @@ page-feeds {
         background-size: 25px;
         background-position: center;
         background-repeat: no-repeat;
+      }
+      .searchbar-md .searchbar-search-icon, .searchbar-md .searchbar-md-cancel {
+          color: #9E00FF;
       }
     
 }

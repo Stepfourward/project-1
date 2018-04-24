@@ -1,7 +1,7 @@
 import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-
+import { NativePageTransitions, NativeTransitionOptions} from '@ionic-native/native-page-transitions';
 import { JobDetailPage } from '../job-detail/job-detail';
 
 import { ModalPage } from '../modal/modal';
@@ -12,6 +12,7 @@ import {
   SwingCardComponent
 } from 'angular2-swing';
 import { HttpClient } from '@angular/common/http';
+import { Card } from '@mobiscroll/angular/src/js/classes/cards';
 
 @IonicPage()
 @Component({
@@ -23,13 +24,14 @@ export class FeedsPage {
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
   stackConfig: StackConfig;
   recentCard: string = '';
+  cards: Array<any>;
   
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,)
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,private nativePageTransitions: NativePageTransitions)
    {
     this.stackConfig = {
-      throwOutConfidence: (offset, element: any) => {
-        return Math.min(Math.abs(offset) / (element.offsetWidth / 2), 1);
+      throwOutConfidence: (offsetX, offsetY, element: any) => {
+        return Math.min(Math.abs(offsetX) / (element.offsetWidth/2), 1);
+        
       },
       transform: (element, x, y, r) => {
         this.onItemMove(element, x, y, r);
@@ -46,6 +48,14 @@ export class FeedsPage {
   }
 
   openPage() {
+    let options: NativeTransitionOptions = {
+      direction: 'down',
+      duration: 100,
+      slowdownfactor: -1,
+      iosdelay: 50,
+      androiddelay: 50, 
+    }
+    this.nativePageTransitions.fade(options);
     this.navCtrl.push(JobDetailPage);
   }
   showAlert() {
@@ -58,7 +68,7 @@ export class FeedsPage {
     this.swingStack.throwin.subscribe((event: DragEvent) => {
       event.target.style.background = '#ffffff';
     });
-
+    
   }
   onItemMove(element, x, y, r) {
     let color = '';
@@ -86,6 +96,11 @@ export class FeedsPage {
     }
 
     return hex;
+  }
+  voteUp(like: boolean) {
+    
+    
+    
   }
   
 

@@ -1,3 +1,9 @@
 page-job {
-    
+    .tabs-md .tab-button[aria-selected=true] .tab-button-icon {
+        color: #9012FE;
+        
+    }  
+    .tabs-md .tab-button[aria-selected=true] .tab-button-text {
+        color: #9012FE;
+    }
 }

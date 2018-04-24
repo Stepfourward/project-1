@@ -50,11 +50,12 @@ export class JobDetailPage {
   }
   minimizePage() {
     let options: NativeTransitionOptions = {
-      direction: 'left',
-      duration: 200,
+      direction: 'down',
+      duration: 100,
       slowdownfactor: -1,
       iosdelay: 50,
-    };
+      androiddelay: 50,
+    }
     this.nativePageTransitions.slide(options);
     this.navCtrl.pop();
   }
