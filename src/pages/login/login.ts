@@ -17,8 +17,8 @@ import { LocationPage} from '../location/location';
 })
 export class LoginPage {
 
-  @ViewChild('em') email;
-  @ViewChild('password') pass;
+  mail: string;
+  password: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -33,8 +33,12 @@ export class LoginPage {
   }
 
   onSignin() {
+
     
-      this.navCtrl.push(LocationPage);
+
+
+
+    this.navCtrl.push(LocationPage);
   }
 
 

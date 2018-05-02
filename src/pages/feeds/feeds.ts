@@ -98,7 +98,7 @@ export class FeedsPage {
     return hex;
   }
   voteUp(like: boolean) {
-    
+    console.log('card is swiped right');
     
     
   }
