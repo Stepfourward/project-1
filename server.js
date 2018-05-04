@@ -22,6 +22,9 @@ app.use(function(req, res, next) {
     next();
  });
 
+ // connecting to mongodb
+ mongoose.connect("mongodb://localhost:27017/userdata");
+
 //modals
 var userdata = mongoose.model('userdata', {
     first_name: string,
@@ -34,6 +37,9 @@ var userdata = mongoose.model('userdata', {
     job_title: string,
     company: string,
     education: string,
+    savedjobslist: string[],
+    appliedjobslist: string[],
+    failedjobslist: string[]
 });
 
 
@@ -43,3 +49,12 @@ app.get('/api/',function(req,res) {
     console.log('adding data');
     
 });
+
+
+
+
+
+
+// listen (start app with node server.js) 
+app.listen(8080);
+console.log("App listening on port 8080");

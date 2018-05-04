@@ -13,6 +13,7 @@ import {
 } from 'angular2-swing';
 import { HttpClient } from '@angular/common/http';
 import { Card } from '@mobiscroll/angular/src/js/classes/cards';
+import { AppliedPage } from '../applied/applied';
 
 @IonicPage()
 @Component({
@@ -25,6 +26,9 @@ export class FeedsPage {
   stackConfig: StackConfig;
   recentCard: string = '';
   cards: Array<any>;
+  buttonColor: string = '#F2F0F4';
+  public press: number = 0;
+  jobtitletosave: string;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,private nativePageTransitions: NativePageTransitions)
    {
@@ -98,11 +102,23 @@ export class FeedsPage {
     return hex;
   }
   voteUp(like: boolean) {
-    console.log('card is swiped right');
-    
+    this.jobtitletosave = 'plain IT solutions';
     
   }
+  getjobtitle() {
+    return this.jobtitletosave;
+  }
   
+  tapEvent(e) {
+    this.press++;
+    if (this.press % 2 != 0 ) {
+      this.buttonColor = '#E24B4B';
+    }
+    else {
+      this.buttonColor = '#F2F0F4';
+    }
+       
+  }
 
   
   

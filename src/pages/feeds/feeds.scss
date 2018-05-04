@@ -47,5 +47,11 @@ page-feeds {
       .searchbar-md .searchbar-search-icon, .searchbar-md .searchbar-md-cancel {
           color: #9E00FF;
       }
-    
+      .ionrow {
+          position: relative;
+          top: 20px;
+      }
+      #sharebtn {
+          left: 55%;
+      }
 }
