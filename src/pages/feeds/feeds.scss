@@ -8,13 +8,14 @@ page-feeds {
         font-size: 14px;
         padding-right: 40px;
         float: left;
+        margin-bottom: 8px;
     }
     .des {
         color: grey;
         font-size: 13px;
         word-wrap: break-word;
         text-align: left;
-        
+        margin-bottom: 8px;
     }
     
     .fade {
@@ -78,6 +79,6 @@ page-feeds {
       }
       #endbtn {
           position: relative;
-          top: 100px;
+          top: -10px;
       }
 }
