@@ -41,9 +41,12 @@ page-matches {
         border-top: 0.55px solid rgba(60, 60, 60, 0.7);
     }
     #srhbtn {
-        color: #9E00FF;
+        color: #3BABE3;
     }
     .tabs-md[tabshighlight="true"] .tab-highlight {
-        background-color: #9E00FF;
+        background-color: #3BABE3;
+    }
+    .tabs-ios[tabsHighlight=true] .tab-highlight {
+        background-color: #3BABE3;
     }
 }

@@ -1,19 +1,16 @@
 page-editinfo {
 	
 #closebtn {
-	color: #9400D3;
+	color: #3BABE3;
 }
 #tickbtn {
-	color: #9400D3;
+	color: #3BABE3;
 }
 
 #content {
-	background: #DCDCDC;
+	background: #F2F2F2;
+}
 
-}
-#impblock {
-	
-}
 #is {
 	font-size: 13px;
 }
@@ -25,8 +22,22 @@ ion-label {
 ion-input {
 	font-size: 12px;
 }
-#locbtn {
-	
+.listitem {
+	margin-bottom: 0px;
 }
+#locbtn {
+	transform: rotate(40deg);
+}
+ion-label[fixed] {
+	flex: 0 0 70px;
+	min-width: 50px;
+	width: 16px;
+}
+#impbtn {
+	color: #3BABE3;
+	position: relative;
+	right: 10px;
+}
+
 
 }

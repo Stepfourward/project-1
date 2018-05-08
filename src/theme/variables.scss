@@ -13,7 +13,9 @@ $app-direction: ltr;
 
 
 @import "ionic.globals";
-
+// Font Awesome
+$fa-font-path: $font-path;
+@import "font-awesome";
 
 // Shared Variables
 // --------------------------------------------------
@@ -42,17 +44,19 @@ $colors: (
   
 );
 
-$searchbar-ios-input-search-icon-color:#9E00FF;
+$searchbar-ios-input-search-icon-color:#3BABE3;
+$searchbar-md-input-search-icon-color:#3BABE3;
+$searchbar-wp-input-search-icon-color:#3BABE3;
 $searchbar-md-input-clear-icon-color: red;
 $searchbar-ios-input-clear-icon-color: red;
-$tabs-ios-tab-icon-color-active: #9E00FF;
-$tabs-ios-tab-text-color-active: #9E00FF;
-$toggle-ios-background-color-on: #9E00FF;
-$toggle-md-handle-background-color-on: #9E00FF;
-$toggle-wp-track-background-color-on: #9E00FF;
-$range-ios-bar-active-background-color: #9E00FF;
-$range-md-bar-active-background-color: #9E00FF;
-$range-wp-bar-active-background-color: #9E00FF;
+$tabs-ios-tab-icon-color-active: #3BABE3;
+$tabs-ios-tab-text-color-active: #3BABE3;
+$toggle-ios-background-color-on: #3BABE3;
+$toggle-md-handle-background-color-on: #3BABE3;
+$toggle-wp-track-background-color-on: #3BABE3;
+$range-ios-bar-active-background-color: #3BABE3;
+$range-md-bar-active-background-color: #3BABE3;
+$range-wp-bar-active-background-color: #3BABE3;
 
 
 

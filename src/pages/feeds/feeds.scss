@@ -5,20 +5,18 @@ page-feeds {
     .label {
 	
         font-weight: bold;
-        font-size: 12px;
+        font-size: 14px;
         padding-right: 40px;
         float: left;
     }
     .des {
         color: grey;
-        font-size: 12px;
+        font-size: 13px;
         word-wrap: break-word;
         text-align: left;
         
     }
-    table, th, td {
-        border: 3px solid white;
-    }
+    
     .fade {
         -webkit-transition: 0.2s opacity linear;
         transition: 0.2s opacity linear;        opacity: 0;
@@ -53,5 +51,33 @@ page-feeds {
       }
       #sharebtn {
           left: 55%;
+         
+      }
+      .custom-share {
+          color: #3BABE3;   
+      }
+      .textoncard {
+        color: white;
+        margin-left: 10px;
+      }
+      .title {
+        position: absolute;
+        top: 125px;
+        font-size: 17px;
+      }
+      .subt {
+          position: absolute;
+          top: 148px;
+          font-size: 13px;
+      }
+      .time {
+          position: absolute;
+          top: 148px;
+          font-size: 13px;
+          left: 210px; 
+      }
+      #endbtn {
+          position: relative;
+          top: 100px;
       }
 }

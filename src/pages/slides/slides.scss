@@ -3,6 +3,7 @@ page-slides {
 #skipbtn {
 	color: white;
 	float: right;
+	opacity: 0.8;
 }
 #contentpage {
 	background: black;	
@@ -12,6 +13,7 @@ page-slides {
 	font-size: 12px;
 	color: white;
 	text-align: center;
+	opacity: 0.8;
 }
 
 #slidepart {
@@ -21,6 +23,10 @@ page-slides {
 .swiper-pagination-bullet-active {
 	background: white;
 }
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+	margin: 0px 10px 0px;
+}
+
 
 
 

@@ -61,12 +61,18 @@ page-profile {
     ion-item {
         height: 8px;
         width: 100%; 
+        
     }
     ion-list {
         height: 52%;
     }
     .toolbar-background {
         background-color: white;
-      }
-
+    }
+    .arrow {
+        margin-left: 5px;
+    }
+    .items {
+        border: 1px solid #E0E0E0;
+    }
 }

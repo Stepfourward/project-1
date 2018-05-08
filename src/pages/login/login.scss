@@ -1,16 +1,14 @@
 page-login {
 
 #closebtn {
-	color: #9012FE;
+	color: #3BABE3;
 }
-#gobtn {
-	color: #9012FE;
-}
+
 .borders {
 	
 	margin-bottom: 10px;
-	border: 2px solid #9012FE;
-	border-radius: 5px;
+	border: 0.55px solid #c8c7cc;
+	border-radius: 0px;
 	width: 100%;
 	height:50px;
 }
@@ -30,6 +28,23 @@ ion-input {
 }
 #fpass {
 	text-align: center;
+	position: relative;
+	bottom: 15px;
+}
+#signinbtn {
+	color: white;
+	background-color: #3BABE3;
+	
+}
+#signdiv {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+ion-label[fixed] {
+	flex: 0 0 70px;
+	min-width: 50px;
+	width: 16px;
+
 }
 
 }

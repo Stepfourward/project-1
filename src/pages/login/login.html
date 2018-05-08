@@ -13,11 +13,7 @@
   		</button>
   	</ion-buttons>
     <ion-title><b>Sign In</b></ion-title>
-    <ion-buttons end>
-    	<button ion-button clear icon-only id="gobtn" (click)="onSignin()">
-    		<ion-icon name="md-arrow-round-forward"></ion-icon>
-    	</button>
-    </ion-buttons>
+    
   </ion-toolbar>
 
 </ion-header>
@@ -27,17 +23,22 @@
 	<br>
 	<div>
 		<ion-list style="margin: 5px;">
-			<div>
+			
 			<ion-item class="borders">
     			<ion-label color="black" fixed>Email</ion-label>
     			<ion-input type="email" placeholder="First" [(ngModel)]="mail" ></ion-input>
-  			</ion-item>
+				</ion-item>
+			</ion-list>
+			<ion-list style="margin: 5px;" >
   			<ion-item class="borders">
     			<ion-label color="black" fixed>Password</ion-label>
     			<ion-input type="Password" placeholder="Password" [(ngModel)]="password" ></ion-input>
 				</ion-item>
-				</div>
-		</ion-list>
+				
+			</ion-list>
+	</div>
+	<div text-center id="signdiv" (click)="onSignin()">
+		<button ion-button block id="signinbtn">Sign In</button>
 	</div>
   <p id="fpass">
 	 <button ion-button clear id="fpassbtn">Forgot Password</button>

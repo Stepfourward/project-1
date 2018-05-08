@@ -1,9 +1,4 @@
-<!--
-  Generated template for the RegisterPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-toolbar class="bar-stable">
@@ -13,8 +8,7 @@
       </button>
     </ion-buttons>
     <ion-title>
-    	<p style="text-align:center;"><button ion-button clear id="signbut" 
-        (click)= "gotoSigninPage()" ><b>Sign In</b></button></p>
+    	<p style="text-align:center;"><b>Sign Up</b></p>
     </ion-title>
 
   </ion-toolbar>
@@ -25,28 +19,31 @@
 <ion-content id="content">
 	<br><br>
 	<div id="ipfeilds">
-		<ion-list>
-			<ion-item>
-    			<ion-label color="black" fixed>First Name</ion-label>
+		<ion-list >
+			<ion-item class="list">
+    			<ion-label class="list2" color="black" fixed>First Name</ion-label>
     			<ion-input placeholder="First"></ion-input>
   			</ion-item>
-  			<ion-item>
-    			<ion-label color="black" fixed>Last Name</ion-label>
+  			<ion-item class="list">
+    			<ion-label class="list2" color="black" fixed>Last Name</ion-label>
     			<ion-input placeholder="Last"></ion-input>
   			</ion-item>
-  			<ion-item>
-    			<ion-label color="black" fixed>Email</ion-label>
+  			<ion-item class="list">
+    			<ion-label class="list2" color="black" fixed>Email</ion-label>
     			<ion-input type="email" placeholder="Email Address"></ion-input>
   			</ion-item>
-  			<ion-item>
-    			<ion-label color="black" fixed>Password</ion-label>
+  			<ion-item class="list">
+    			<ion-label  class="list2" color="black" fixed>Password</ion-label>
     			<ion-input type="password" placeholder="Password"></ion-input>
   			</ion-item>
 		</ion-list>
 	</div>
 	<br>
 	<p id="Policy">I agree the Terms of Usage and Privacy Policy</p>
-	<button ion-button block id="newAcbtn">Create New Account</button>
+	<div id="newAcbtnpos">
+		<button ion-button block id="newAcbtn">Create New Account</button>
+	</div>
+	
 
 
 

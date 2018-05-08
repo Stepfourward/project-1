@@ -1,26 +1,27 @@
 page-register {
 
-#titlesignin {
-	color: #B200FF;
-	text-align: center;
 
-}
 
 #colsebutton {
 	
-	color: #B200FF;
+	color: #3BABE3;
 }
-#signbut {
-	color: black;
-}
+
 
 #ipfeilds {
 	width: 320px;
 	height: 100px;
 	background: #FFFFFF;
+	position: relative;
+	top: 15px;
+	
 	
 
 
+}
+.list2 { padding-left: 16px;}
+.list {
+	padding-left: 0px; 
 }
 #content {
 	background: #F5F5F5;
@@ -36,14 +37,22 @@ ion-input {
 	color: grey;
 	text-align: center;
 	position: relative;
-	top: 80px;
+	top: 90px;
 }
 #newAcbtn {
-	background: #B200FF;
-	top: 90px;
-	margin-left: auto;
-    margin-right: auto;
+	background: #3BABE3;
+	top: 100px;
+	
 
+}
+#newAcbtnpos {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+ion-label[fixed] {
+	min-width: 50px;
+	flex: 0 0 90px;
 }
 
 
