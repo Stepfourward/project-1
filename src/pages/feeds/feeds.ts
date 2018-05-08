@@ -12,7 +12,6 @@ import {
   SwingCardComponent
 } from 'angular2-swing';
 import { HttpClient } from '@angular/common/http';
-import { Card } from '@mobiscroll/angular/src/js/classes/cards';
 import { AppliedPage } from '../applied/applied';
 
 @IonicPage()
