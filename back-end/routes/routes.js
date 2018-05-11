@@ -4,7 +4,16 @@ const router = express.Router();
 
 const datas = require('../models/userdata');
 
-router.get('/userdata')
+router.get('/userdata');
+
+// retriving userdata
+router.get('/datalist',(req,res,next) => {
+    datas.find()
+}); 
+// add userdata
+router.post('/datalist',(req,res,next) => {
+    
+});
 
 
 
