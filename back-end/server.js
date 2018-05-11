@@ -1,44 +1,51 @@
-const express = require('express');
-var app      = express();                               
-var mongoose = require('mongoose');                  
-var morgan = require('morgan');             
-var bodyParser = require('body-parser');    
-var methodOverride = require('method-override'); 
+// importing modules 
+var express = require('express');
+var mongoose = require('mongoose');
+var bodyparser = require('body-parser');
 var cors = require('cors');
+var path = require('path');
 
-// declearing routes
-const route = require('./routes/routes');
-app.use('api',route);
+var app = express();
 
-// connecting to mongodb
-mongoose.connect("mongodb://localhost:27017/userdata",);
 
-// checking whether connected with mongodb or not
-mongoose.connection.on('connected',() => {
-    console.log('connected to db');
+// connect to mongodb
+mongoose.connect('mongodb://localhost:27017/contactlist');
+
+// on connection
+mongoose.connection.on('connected',()=>{
+    console.log('connected to mongos database at 27017');
 });
-mongoose.connection.on('error',(err) => {
+
+// on error 
+mongoose.connection.on('error',(err)=>{
     if(err) {
-        console.log('error is'+ err);
+        console.log('Error in database connection:'+ err);
+          
     }
 });
 
+//port number
+const port = 3000;
 
+const route = require('./routes/routes');
 
-app.use(bodyParser.urlencoded({ 'extended':'true' })); 
-app.use(bodyParser.json());
-app.use(logger('dev')); 
+//adding middleware cors
 app.use(cors());
 
+//adding parser
+app.use(bodyparser.json())
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'DELETE, PUT');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+//adding routes
+app.use('/api', route);
 
+//using static files
+app.use(express.static(path.join(__dirname, 'public')));
 
-// listen (start app with node server.js) 
-app.listen(8080 || process.env.PORT);
-console.log("App listening on port 8080");
+//testing server
+app.get('/',(req,res)=>{
+    res.send('test content');
+})
+
+app.listen(port,()=> {
+    console.log('Server started at port'+ port);
+})
