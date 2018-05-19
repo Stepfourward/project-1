@@ -17,8 +17,8 @@
 
 <ion-content id="content">
 	<br><br>
+	<flash-messages></flash-messages> 
 	<div id="ipfeilds">
-			<flash-messages></flash-messages> 
 			<form (submit)="onRegisterSubmit()">
 				<ion-list>
 					<ion-item class="list">
@@ -38,7 +38,6 @@
 						<ion-input type="password" [(ngModel)]="password" name="password" class="form-control"></ion-input>
 					</ion-item>
 				</ion-list>
-				<br>
 				<p id="Policy">I agree the Terms of Usage and Privacy Policy</p>
 				<div id="newAcbtnpos">
 					<button type="submit"  ion-button block id="newAcbtn" value="Submit">Create New Account</button>

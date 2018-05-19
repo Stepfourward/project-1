@@ -5,7 +5,6 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-toolbar>
   	<ion-buttons left>
   		<button ion-button clear icon-only id="closebtn" (click)="gotoHomepage()">
@@ -13,18 +12,15 @@
   		</button>
   	</ion-buttons>
     <ion-title><b>Sign In</b></ion-title>
-    
   </ion-toolbar>
-
 </ion-header>
 
 
 <ion-content id="content">
 	<br>
 	<div>
-			<flash-messages></flash-messages> 
-
-			<form (submit)="onLoginSubmit()">
+			<div  [class.toggleFlashMsgs]="toggleFlashMsgs"><flash-messages></flash-messages></div>
+			<form (submit)="onLoginSubmit()" id="login-form">
 						<ion-list style="margin: 5px;">
 						<ion-item class="borders">
 						<ion-label color="black" fixed>Username</ion-label>
