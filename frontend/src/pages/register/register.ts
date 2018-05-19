@@ -50,13 +50,15 @@ export class RegisterPage {
     console.log(user);
     // Required Fields
     if(!this.validateService.validateRegister(user)){
-      this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 444000});
+      this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 4000});
+      this.flashMessage.grayOut(true);
       return false;
     }
     
     // Validate Email
     if(!this.validateService.validateEmail(user.email)){
       this.flashMessage.show('Please use a valid email', {cssClass: 'alert-danger', timeout: 4000});
+      this.flashMessage.grayOut(true);
       return false;
     }
     // Register user

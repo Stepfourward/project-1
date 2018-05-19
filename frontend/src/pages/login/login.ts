@@ -19,7 +19,7 @@ import {AuthService} from '../../services/auth.service';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
+  toggleFlashMsgs:boolean = true;
   username: String;
   password: String;
 
@@ -47,15 +47,19 @@ console.log(user);
     this.authService.authenticateUser(user).subscribe(data => {
       if(data.success){
         this.authService.storeUserData(data.token, data.user);
+        this.toggleFlashMsgs = true;
         this.flashMessage.show('You are now logged in', {
           cssClass: 'alert-success',
           timeout: 5000});
        // this.router.navigate(['dashboard']);
+       this.toggleFlashMsgs = false;
        this.navCtrl.push(LocationPage);
       } else {
+        this.toggleFlashMsgs = true;
         this.flashMessage.show(data.msg, {
           cssClass: 'alert-danger',
           timeout: 55000});
+          this.toggleFlashMsgs = false;
        // this.router.navigate(['login']);
          return false;
       }
