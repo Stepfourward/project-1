@@ -15,34 +15,37 @@
 
 </ion-header>
 
-
 <ion-content id="content">
 	<br><br>
 	<div id="ipfeilds">
-		<ion-list >
-			<ion-item class="list">
-    			<ion-label class="list2" color="black" fixed>First Name</ion-label>
-    			<ion-input placeholder="First"></ion-input>
-  			</ion-item>
-  			<ion-item class="list">
-    			<ion-label class="list2" color="black" fixed>Last Name</ion-label>
-    			<ion-input placeholder="Last"></ion-input>
-  			</ion-item>
-  			<ion-item class="list">
-    			<ion-label class="list2" color="black" fixed>Email</ion-label>
-    			<ion-input type="email" placeholder="Email Address"></ion-input>
-  			</ion-item>
-  			<ion-item class="list">
-    			<ion-label  class="list2" color="black" fixed>Password</ion-label>
-    			<ion-input type="password" placeholder="Password"></ion-input>
-  			</ion-item>
-		</ion-list>
+			<flash-messages></flash-messages> 
+			<form (submit)="onRegisterSubmit()">
+				<ion-list>
+					<ion-item class="list">
+						<ion-label class="list2" color="black" fixed>Full name</ion-label>
+						<ion-input type="text" [(ngModel)]="name" name="name" class="form-control"></ion-input>
+					</ion-item>
+					<ion-item class="list">
+						<ion-label class="list2" color="black" fixed>User name</ion-label>
+						<ion-input type="text" [(ngModel)]="username" name="usename" class="form-control"></ion-input>
+					</ion-item>
+					<ion-item class="list">
+						<ion-label class="list2" color="black" fixed>Email</ion-label>
+						<ion-input type="email" [(ngModel)]="email" name="email" class="form-control" ></ion-input>
+					</ion-item>
+					<ion-item class="list">
+						<ion-label  class="list2" color="black" fixed>Password</ion-label>
+						<ion-input type="password" [(ngModel)]="password" name="password" class="form-control"></ion-input>
+					</ion-item>
+				</ion-list>
+				<br>
+				<p id="Policy">I agree the Terms of Usage and Privacy Policy</p>
+				<div id="newAcbtnpos">
+					<button type="submit"  ion-button block id="newAcbtn" value="Submit">Create New Account</button>
+				</div>
+			</form>
 	</div>
-	<br>
-	<p id="Policy">I agree the Terms of Usage and Privacy Policy</p>
-	<div id="newAcbtnpos">
-		<button ion-button block id="newAcbtn">Create New Account</button>
-	</div>
+	
 	
 
 

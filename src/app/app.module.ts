@@ -2,7 +2,7 @@ import { FormsModule } from '@angular/forms';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, IonicPageModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -11,9 +11,6 @@ import { IonTextAvatar } from 'ionic-text-avatar';
 import { SwingModule } from 'angular2-swing';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
-
-
-
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {RegisterPage} from '../pages/register/register';
@@ -29,8 +26,9 @@ import { AppliedPage } from '../pages/applied/applied';
 import { FailedPage } from '../pages/failed/failed';
 import { SavedPage } from '../pages/saved/saved';
 import { ModalPage } from '../pages/modal/modal';
-
-
+import { ValidateService } from '../services/validate.service';
+import {FlashMessagesModule} from 'angular2-flash-messages';
+import {AuthService} from '../services/auth.service';
 
 @NgModule({
   declarations: [
@@ -50,16 +48,16 @@ import { ModalPage } from '../pages/modal/modal';
     SavedPage,
     IonTextAvatar,
     ModalPage,
-    
-    
   ],
   imports: [ 
     FormsModule, 
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    FlashMessagesModule.forRoot(),
     HttpModule,
     SwingModule,
     IonicSwipeAllModule,
+    // IonicPageModule.forChild(RegisterPage)
    
     
 
@@ -90,6 +88,8 @@ import { ModalPage } from '../pages/modal/modal';
     SplashScreen,
     Geolocation,
     NativePageTransitions,
+    ValidateService,
+    AuthService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

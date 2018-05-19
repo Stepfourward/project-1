@@ -22,24 +22,27 @@
 <ion-content id="content">
 	<br>
 	<div>
-		<ion-list style="margin: 5px;">
-			
-			<ion-item class="borders">
-    			<ion-label color="black" fixed>Email</ion-label>
-    			<ion-input type="email" placeholder="First" [(ngModel)]="mail" ></ion-input>
-				</ion-item>
-			</ion-list>
-			<ion-list style="margin: 5px;" >
-  			<ion-item class="borders">
-    			<ion-label color="black" fixed>Password</ion-label>
-    			<ion-input type="Password" placeholder="Password" [(ngModel)]="password" ></ion-input>
-				</ion-item>
-				
-			</ion-list>
+			<flash-messages></flash-messages> 
+
+			<form (submit)="onLoginSubmit()">
+						<ion-list style="margin: 5px;">
+						<ion-item class="borders">
+						<ion-label color="black" fixed>Username</ion-label>
+						<ion-input type="text" class="form-control" name="username" [(ngModel)]="username" ></ion-input>
+						</ion-item>
+						</ion-list>
+						<ion-list style="margin: 5px;">
+						<ion-item class="borders">
+						<ion-label color="black" fixed>Password</ion-label>
+						<ion-input type="password" class="form-control" [(ngModel)]="password" name="password"></ion-input>
+						</ion-item>
+						</ion-list>
+						<div text-center id="signdiv">
+						<button type="submit" ion-button block id="signinbtn" value="Login">Sign In</button>
+						</div>	
+			</form>
 	</div>
-	<div text-center id="signdiv" (click)="onSignin()">
-		<button ion-button block id="signinbtn">Sign In</button>
-	</div>
+	
   <p id="fpass">
 	 <button ion-button clear id="fpassbtn">Forgot Password</button>
   </p>
