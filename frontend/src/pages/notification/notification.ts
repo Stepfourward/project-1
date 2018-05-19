@@ -27,5 +27,8 @@ export class NotificationPage {
 
   	 this.navCtrl.push(EditinfoPage);
   }
+  acccessNofification() {
+    this.navCtrl.push(EditinfoPage);
+  }
 
 }

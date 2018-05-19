@@ -1,11 +1,11 @@
 import { FormsModule } from '@angular/forms';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule, IonicPageModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { HttpModule } from '@angular/http';
 import { IonTextAvatar } from 'ionic-text-avatar';
 import { SwingModule } from 'angular2-swing';
@@ -89,6 +89,7 @@ import {AuthService} from '../services/auth.service';
     Geolocation,
     NativePageTransitions,
     ValidateService,
+    NativeGeocoder,
     AuthService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

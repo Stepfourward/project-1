@@ -7,12 +7,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import {AuthService} from '../../services/auth.service';
  // import {Router} from '@angular/router';
 
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage({
   name: 'page-register',
