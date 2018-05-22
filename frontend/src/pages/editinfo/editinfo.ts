@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SlidesPage } from '../slides/slides';
+import { FeedsPage } from '../feeds/feeds';
 
 
 /**
@@ -27,5 +28,7 @@ export class EditinfoPage {
   toSlides() {
   	this.navCtrl.push(SlidesPage);
   }
-
+  closeEditInfoPage() {
+    this.navCtrl.push(FeedsPage);
+  }
 }
