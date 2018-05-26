@@ -50,6 +50,19 @@ ion-label[fixed] {
 	min-width: 50px;
 	flex: 0 0 90px;
 }
+.control-messages {
+	font-size: 13px;
+	color: red;
+	position: relative;
+	top:0px;
+	left: 15px;
 
+}
+ion-item:first-child {
+	//margin-bottom: 10px;
+}
+ion-item {
+	margin-top: 10px;
+}
 
 }

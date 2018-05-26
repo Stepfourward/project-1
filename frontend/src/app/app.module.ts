@@ -1,7 +1,6 @@
-import { FormsModule } from '@angular/forms';
-
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule, IonicPageModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -29,6 +28,11 @@ import { ModalPage } from '../pages/modal/modal';
 import { ValidateService } from '../services/validate.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {AuthService} from '../services/auth.service';
+import { NgZone } from '@angular/core';
+import { ValidationService } from './validation.service';
+import { ControlMessagesComponent } from './control-messages.component';
+import { HandleUserDataService } from '../services/handleUserData.service';
+
 
 @NgModule({
   declarations: [
@@ -48,15 +52,18 @@ import {AuthService} from '../services/auth.service';
     SavedPage,
     IonTextAvatar,
     ModalPage,
+    ControlMessagesComponent
   ],
   imports: [ 
     FormsModule, 
     BrowserModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
     FlashMessagesModule.forRoot(),
     HttpModule,
     SwingModule,
     IonicSwipeAllModule,
+    
     // IonicPageModule.forChild(RegisterPage)
    
     
@@ -67,7 +74,7 @@ import {AuthService} from '../services/auth.service';
     MyApp,
     HomePage,
     RegisterPage,
-    LoginPage,
+    LoginPage,  
     LocationPage,
     NotificationPage,
     EditinfoPage,
@@ -80,17 +87,18 @@ import {AuthService} from '../services/auth.service';
     SavedPage,
     ModalPage
     
-    
-    
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
+    HandleUserDataService,
     NativePageTransitions,
     ValidateService,
     AuthService,
+    ValidationService, 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}

@@ -11,7 +11,12 @@ router.post('/register', (req, res, next) => {
         name: req.body.name,
         email: req.body.email,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        phone:req.body.phone,
+        location:req.body.location,
+        title:req.body.title,
+        company:req.body.company,
+        education:req.body.education
       });
     
       User.addUser(newUser, (err, user) => {
@@ -22,6 +27,22 @@ router.post('/register', (req, res, next) => {
         }
       });
 });
+
+// Update User
+router.post('/update', function(req, res, next) {
+  let newUser = new User({
+    name: req.body.name,
+    email: req.body.email,
+    username: req.body.username,
+    phone:req.body.phone,
+    location:req.body.location,
+    title:req.body.title,
+    company:req.body.company,
+    education:req.body.education
+  });
+  
+})
+
 
 // Authenticate
 router.post('/authenticate', (req, res, next) => {
@@ -57,6 +78,8 @@ router.post('/authenticate', (req, res, next) => {
     });
   });
 });
+
+
 
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
