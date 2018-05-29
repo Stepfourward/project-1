@@ -9,7 +9,7 @@
   		</ion-buttons>
   		<ion-title>Edit info</ion-title>
   	  	<ion-buttons end>
-  			<button ion-button clear icon-only (click)="toSlides()" >
+  			<button ion-button clear icon-only type="submit" (click)="toSlides()">
   				<ion-icon name="md-checkmark" id="tickbtn"></ion-icon>
   			</button>
   		</ion-buttons>
@@ -19,7 +19,6 @@
 
 <ion-content id="content">
   <p style="font-size: 10px;color: grey;text-align:center" >Attach your resumes or fill the fill the feilds below</p>
-  
   <ion-list>
     <ion-item>
       <button ion-button clear item-start id="impbtn">Import Resume</button>
@@ -100,4 +99,5 @@
           </div>
         </form>
     </ion-list>
+
 </ion-content>

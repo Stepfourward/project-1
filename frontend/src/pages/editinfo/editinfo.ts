@@ -11,8 +11,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from '../../app/validation.service';
 import { HandleUserDataService } from '../../services/handleUserData.service';
 import { FeedsPage } from '../feeds/feeds';
-
-
 /**
  * Generated class for the EditinfoPage page.
  *
@@ -20,12 +18,13 @@ import { FeedsPage } from '../feeds/feeds';
  * Ionic pages and navigation.
  */
 @Injectable()
+import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import { NativeGeocoder, NativeGeocoderReverseResult } from '@ionic-native/native-geocoder';
 @IonicPage()
 @Component({
   selector: 'page-editinfo',
   templateUrl: 'editinfo.html',
 })
-
 export class EditinfoPage implements OnInit {
   userSpecificData:object = {name: "", email: "", username: ""};
   currentUserData:any;
@@ -37,10 +36,14 @@ export class EditinfoPage implements OnInit {
   email:string;
   password:any;
   phone:any;
+  first_name: string;
+  last_name: string;
   location:any;
   title:string;
   company:string;
   education:string;
+  locationName: any;
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -48,7 +51,10 @@ export class EditinfoPage implements OnInit {
     private flashMessage:FlashMessagesService,
     private authService:AuthService,
     private formBuilder: FormBuilder,
-    public userDataService: HandleUserDataService) {
+    public userDataService: HandleUserDataService,
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder
+              ) {
       this.EditPageUserForm = this.formBuilder.group({
         'name': ['', Validators.required],
         'username': ['', Validators.required],
@@ -60,9 +66,7 @@ export class EditinfoPage implements OnInit {
         'phone':['',Validators.required]
       });
   }
-
   ionViewDidLoad() {
-    
   }
   ngOnInit() {
     this.currentUserData = {name: "aleem", email: "shaikaleem.aleem@gmail.com", username: "shak", password: "123456"}
@@ -143,4 +147,25 @@ export class EditinfoPage implements OnInit {
   closeEditInfoPage() {
     this.navCtrl.push(FeedsPage);
   }
+  getlocation() {
+    let options = {
+      enableHighAccuracy: true
+    };
+    this.geolocation.getCurrentPosition(options).then((position: Geoposition) => {
+      this.getcountry(position);
+      console.log(this.locationName);
+    }).catch((err) => {
+      console.log(err);
+    })
+    
+  }
+  getcountry(pos) {
+    this.nativeGeocoder.reverseGeocode(pos.coords.latitude, pos.coords.longitude)
+    .then((res: NativeGeocoderReverseResult) => {
+      this.locationName = res.countryName + "," + res.locality;
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+
 }

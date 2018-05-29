@@ -13,6 +13,7 @@ import {
 } from 'angular2-swing';
 import { HttpClient } from '@angular/common/http';
 import { AppliedPage } from '../applied/applied';
+import { AutoCompleteModule } from 'ionic2-auto-complete';
 
 @IonicPage()
 @Component({
@@ -28,8 +29,15 @@ export class FeedsPage {
   buttonColor: string = '#F2F0F4';
   public press: number = 0;
   jobtitletosave: string;
+  showdropdown: boolean = false;
+  searchQuery: string = '';
+  items: string[];
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,private nativePageTransitions: NativePageTransitions)
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public modalCtrl: ModalController,
+    private nativePageTransitions: NativePageTransitions
+    )
    {
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element: any) => {
@@ -43,6 +51,7 @@ export class FeedsPage {
         return 800;
       }
     };
+    this.initializeItems();
     
    }
 
@@ -116,12 +125,38 @@ export class FeedsPage {
     else {
       this.buttonColor = '#F2F0F4';
     }
-       
+  }
+  // job roles to display in dropdown
+  initializeItems() {
+    this.items = [
+      'java developer',
+      '.Net developer',
+      'python developer',
+      'Full Stack developer',
+      'UX/UI design',
+      'MEAN stack developer',
+      'hadoop',
+      'Data scientist',
+      'js developer'
+    ];
+  }
+  // get job items
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    this.initializeItems();
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.items = this.items.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      });
+      this.showdropdown = true;
+    } else {
+      this.showdropdown = false;
+    }
   }
 
-  
-  
-  
 }
 
 

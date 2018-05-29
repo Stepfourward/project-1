@@ -33,7 +33,10 @@ import { NgZone } from '@angular/core';
 import { ValidationService } from './validation.service';
 import { ControlMessagesComponent } from './control-messages.component';
 import { HandleUserDataService } from '../services/handleUserData.service';
-
+import { AutoCompleteModule } from 'ionic2-auto-complete';
+import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
+import { PolicyPage } from '../pages/policy/policy';
+import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
 
 @NgModule({
   declarations: [
@@ -54,11 +57,15 @@ import { HandleUserDataService } from '../services/handleUserData.service';
     IonTextAvatar,
     ModalPage,
     ControlMessagesComponent
+    ForgotPasswordPage,
+    PolicyPage,
+    TermsofusagePage
   ],
   imports: [ 
     FormsModule, 
     BrowserModule,
     ReactiveFormsModule,
+    AutoCompleteModule,
     IonicModule.forRoot(MyApp),
     FlashMessagesModule.forRoot(),
     HttpModule,
@@ -86,8 +93,10 @@ import { HandleUserDataService } from '../services/handleUserData.service';
     AppliedPage,
     FailedPage,
     SavedPage,
-    ModalPage
-    
+    ModalPage,
+    ForgotPasswordPage,
+    PolicyPage,
+    TermsofusagePage 
   ],
   providers: [
     StatusBar,

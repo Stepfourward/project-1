@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { LocationPage} from '../location/location';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -8,14 +9,7 @@ import { NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidateService } from '../../services/validate.service';
 import { ValidationService } from '../../app/validation.service';
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -51,15 +45,13 @@ export class LoginPage implements OnInit {
   } 
   clearErr(event) {
     this.ErrorMsgStatus = false;
+    private authService:AuthService,
+    public alertCtrl: AlertController) {
   }
-
   gotoHomepage() {
   	this.navCtrl.push(HomePage);
-
   }
-
   ionViewDidLoad() {
-    
   }
 
   // getTheValue(k) {
@@ -120,5 +112,31 @@ export class LoginPage implements OnInit {
       }
     });
   }
+  fp() {
+    let prompt = this.alertCtrl.create({
+      title: 'Reset Password',
+      message: "Enter your email address to reset your password",
+      inputs: [
+        {
+          name: 'emailid',
+          placeholder: 'email ID'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Reset',
+          handler: data => {
+            this.navCtrl.push(ForgotPasswordPage);
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 }

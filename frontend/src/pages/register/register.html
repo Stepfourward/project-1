@@ -42,7 +42,7 @@
 					</ion-item>
 					<control-messages [control]="userForm.controls.password" class="control-messages"></control-messages>
 				</ion-list>
-				<p id="Policy">I agree the Terms of Usage and Privacy Policy</p>
+				<p id="Policy">I agree the <u (click)="totermPage()">Terms of Usage</u> and <u (click)="toPolicypage()">Privacy Policy</u></p>
 				<div id="newAcbtnpos">
 					<button type="submit"  ion-button block id="newAcbtn" value="Submit">Create New Account</button>
 				</div>

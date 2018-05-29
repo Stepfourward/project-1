@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EditinfoPage } from '../editinfo/editinfo';
+import { PolicyPage } from '../policy/policy';
 
-/**
- * Generated class for the NotificationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -29,6 +24,10 @@ export class NotificationPage {
   }
   acccessNofification() {
     this.navCtrl.push(EditinfoPage);
+  }
+  // redirect to policy page
+  toPolicypage() {
+    this.navCtrl.push(PolicyPage);
   }
 
 }

@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from '../../app/validation.service';
 import { HandleUserDataService } from '../../services/handleUserData.service';
  // import {Router} from '@angular/router';
+ import { PolicyPage } from '../policy/policy';
+import { TermsofusagePage } from '../termsofusage/termsofusage';
 
 /**
  * Generated class for the RegisterPage page.
@@ -118,11 +120,14 @@ this.authService.registerUser(user).subscribe(data => {
 
   }
 
-
-
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
-
+  // redirect to policy page
+  toPolicypage() {
+    this.navCtrl.push(PolicyPage);
+  }
+  totermPage() {
+    this.navCtrl.push(TermsofusagePage);
+  }
 }
