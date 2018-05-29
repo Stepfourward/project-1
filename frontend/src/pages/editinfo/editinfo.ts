@@ -10,7 +10,6 @@ import {AuthService} from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from '../../app/validation.service';
 import { HandleUserDataService } from '../../services/handleUserData.service';
-
 import { FeedsPage } from '../feeds/feeds';
 
 
@@ -141,6 +140,7 @@ export class EditinfoPage implements OnInit {
     
 
   }
-
-
+  closeEditInfoPage() {
+    this.navCtrl.push(FeedsPage);
+  }
 }

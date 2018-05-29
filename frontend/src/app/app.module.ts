@@ -5,6 +5,7 @@ import { IonicApp, IonicErrorHandler, IonicModule, IonicPageModule } from 'ionic
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { HttpModule } from '@angular/http';
 import { IonTextAvatar } from 'ionic-text-avatar';
 import { SwingModule } from 'angular2-swing';
@@ -32,7 +33,6 @@ import { NgZone } from '@angular/core';
 import { ValidationService } from './validation.service';
 import { ControlMessagesComponent } from './control-messages.component';
 import { HandleUserDataService } from '../services/handleUserData.service';
-import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 
 
 @NgModule({
@@ -96,6 +96,7 @@ import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResul
     HandleUserDataService,
     NativePageTransitions,
     ValidateService,
+    NativeGeocoder,
     AuthService,
     ValidationService, 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
