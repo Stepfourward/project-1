@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from '../../app/validation.service';
 import { HandleUserDataService } from '../../services/handleUserData.service';
 
+import { FeedsPage } from '../feeds/feeds';
 
 
 /**
