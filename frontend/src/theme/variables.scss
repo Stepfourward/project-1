@@ -61,6 +61,8 @@ $range-md-bar-active-background-color: #3BABE3;
 $range-wp-bar-active-background-color: #3BABE3;
 
 
+
+
 // Styling for flash message
 .alert-success {
   color: #3c763d;
@@ -135,3 +137,16 @@ $range-wp-bar-active-background-color: #3BABE3;
 
 @import "roboto";
 @import "noto-sans";
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+ 
+$popover-ios-width: 95%;
+
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+ 
+$popover-md-width: 95%;
+

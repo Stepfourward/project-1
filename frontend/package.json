@@ -35,6 +35,7 @@
     "bootstrap": "^4.1.1",
     "com.telerik.plugins.nativepagetransitions": "^0.6.5",
     "cordova-android": "~7.0.0",
+    "cordova-browser": "~5.0.3",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
@@ -48,6 +49,7 @@
     "ionic-angular": "3.9.2",
     "ionic-swipe-all": "^1.2.0",
     "ionic-text-avatar": "^1.1.0",
+    "ionic2-auto-complete": "^1.6.2-alpha",
     "ionicons": "3.0.0",
     "mongodb": "^3.0.7",
     "mongoose": "^4.6.2",
@@ -56,8 +58,7 @@
     "react-native-card-stack-swiper": "^1.0.8",
     "rxjs": "5.5.7",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.20",
-    "cordova-browser": "~5.0.3"
+    "zone.js": "0.8.20"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",

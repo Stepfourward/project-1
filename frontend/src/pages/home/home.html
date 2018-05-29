@@ -8,16 +8,16 @@
   <div id="desc1" text-center>
   	<p style="color: #3CABE2;">The easiest way to find a job</p>
   </div>
-  <div id="desc2">
-  	<p style="color: grey">I agree to Terms of Usage and Privacy Policy</p>
+ 
+  <div id="linklogo" text-center>
+    <button ion-button icon-only clear>
+        <img id="linkimg" src="assets/imgs/linkedin1.png">
+    </button>
   </div>
-
-
-
-  <div id="linklogo">
-  	<img id="linkimg" src="../assets/imgs/logoli.png"><img>
+  <div text-center class="desc2">
+    I agree to the<u (click)="totermPage()" >Terms of usage</u> and <u (click)="toPolicypage()">Privacy Policy</u>
   </div>
-  	
+  
   <button ion-button clear id="sign2" (click)="openRegisterPage()">Sign Up with Email</button>
 	
 

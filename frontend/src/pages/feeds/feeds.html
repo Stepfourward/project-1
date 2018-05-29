@@ -2,17 +2,24 @@
 <ion-header>
   <ion-toolbar>
   	
-  	<ion-searchbar searchbar-ios-input-search-icon-color="purple" placeholder="Search for jobs"></ion-searchbar>
-  	<ion-buttons end>
-  		<button ion-button clear style="color: #3BABE3;" (click)="showAlert()" >
-			<i class="fas fa fa-filter"></i>
-		</button>
-  	</ion-buttons>	
+		<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+		<ion-buttons end>
+			<button ion-button clear style="color: #3BABE3;" (click)="showAlert()" >
+				<i class="fas fa fa-filter"></i>
+			</button>
+		</ion-buttons>	
   </ion-toolbar>
-  </ion-header>
+</ion-header>
 
 
 <ion-content>
+	<div *ngIf="showdropdown">
+		<ion-list class="dropdown">
+			<ion-item *ngFor="let jobItems of items">
+				{{ jobItems }}
+			</ion-item>
+		</ion-list>
+	</div>	
 	<div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack" >
 		<ion-card #mycards1 swing-card >
 			<div >
@@ -62,6 +69,5 @@
 				</div>
 			</ion-card-content>
 		</ion-card>
-	</div>
-		
+	</div>	
 </ion-content>
