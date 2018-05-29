@@ -38,7 +38,7 @@
 						<ion-input type="password" [(ngModel)]="password" name="password" class="form-control"></ion-input>
 					</ion-item>
 				</ion-list>
-				<p id="Policy">I agree the Terms of Usage and Privacy Policy</p>
+				<p id="Policy">I agree the <u (click)="totermPage()">Terms of Usage</u> and <u (click)="toPolicypage()">Privacy Policy</u></p>
 				<div id="newAcbtnpos">
 					<button type="submit"  ion-button block id="newAcbtn" value="Submit">Create New Account</button>
 				</div>

@@ -6,6 +6,8 @@ import { ValidateService } from '../../services/validate.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import {AuthService} from '../../services/auth.service';
  // import {Router} from '@angular/router';
+ import { PolicyPage } from '../policy/policy';
+import { TermsofusagePage } from '../termsofusage/termsofusage';
 
 
 
@@ -80,11 +82,14 @@ export class RegisterPage {
 
   }
 
-
-
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
-
+  // redirect to policy page
+  toPolicypage() {
+    this.navCtrl.push(PolicyPage);
+  }
+  totermPage() {
+    this.navCtrl.push(TermsofusagePage);
+  }
 }

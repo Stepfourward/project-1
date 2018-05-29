@@ -87,5 +87,17 @@ page-feeds {
       .tabs .tabbar {
         background-color: white;
     }
+    .dropdown {
+        position: absolute;
+        z-index: 1;
+        background-color: whitesmoke;
+        width: 84%;
+        max-height: 150px;
+        margin-left: 5px;
+        left: 10px;
+        overflow-y: auto;
+        border: 0.55px solid grey;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
     
 }

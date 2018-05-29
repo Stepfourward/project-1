@@ -9,7 +9,7 @@
   		</ion-buttons>
   		<ion-title>Edit info</ion-title>
   	  	<ion-buttons end>
-  			<button ion-button clear icon-only (click)="toSlides()" >
+  			<button ion-button clear icon-only type="submit" (click)="toSlides()">
   				<ion-icon name="md-checkmark" id="tickbtn"></ion-icon>
   			</button>
   		</ion-buttons>
@@ -20,74 +20,77 @@
 <ion-content id="content">
   <p style="font-size: 10px;color: grey;text-align:center" >Attach your resumes or fill the fill the feilds below</p>
   
-  <ion-list>
-    <ion-item>
-      <button ion-button clear item-start id="impbtn">Import Resume</button>
-      <button ion-button icon-only clear item-end>
-        <ion-icon name="logo-dropbox"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-list>
-  <ion-list class="listitem">
-    <ion-item>
-      <ion-label color="black" fixed>First Name</ion-label>
-      <ion-input placeholder="First Name"></ion-input>
-    </ion-item>
-  </ion-list>
-  <ion-list class="listitem">
-    <ion-item>
-      <ion-label color="black" fixed>Last Name</ion-label>
-      <ion-input placeholder="Last Name"></ion-input>
-    </ion-item>
-  </ion-list>
-  <ion-list class="listitem">
-    <ion-item>
-      <ion-label color="black" fixed>Phone</ion-label>
-      <ion-input type="number" placeholder="Phone"></ion-input>
-    </ion-item>
-  </ion-list>
-  <ion-list class="listitem">
-    <ion-item>
-      <ion-label color="black" fixed>Email</ion-label>
-      <ion-input type="email" placeholder="Email"></ion-input>
-    </ion-item>
-  </ion-list>  
-  <ion-list class="listitem">
-    <ion-item>
-      <ion-label color="black" fixed>Location
-       
-      </ion-label>
-      <button ion-button icon-only clear item-end id="locbtn">
-            <ion-icon name="md-navigate"></ion-icon>
-      </button>
-      <ion-input placeholder="Location"></ion-input>
-      
-    </ion-item>
-  </ion-list>
-  <ion-list class="listitem">
-    <ion-item>
-      <ion-label color="black" fixed>Title
-        <p style="text-align: justify;color: red;font-size: 8px;">this feild is required</p>
-      </ion-label>
-      <ion-input placeholder="Title"></ion-input>
-      
-    </ion-item>
-  </ion-list>
-  <ion-list class="listitem">
-    <ion-item>
-      <ion-label color="black" fixed>Company</ion-label>
-      <ion-input placeholder="Eg Apple"></ion-input>
-    </ion-item>
-  </ion-list>
-  <ion-list class="listitem">
-    <ion-item>
-      <ion-label color="black" fixed>Education
-        <p style="text-align: justify;color: red;font-size: 8px;">this feild is required</p>
-      </ion-label>
-      <ion-input placeholder="University"></ion-input>
-    </ion-item>
-  </ion-list>
-
+    <ion-list>
+      <ion-item>
+        <button ion-button clear item-start id="impbtn">Import Resume</button>
+        <button ion-button icon-only clear item-end>
+          <ion-icon name="logo-dropbox"></ion-icon>
+        </button>
+        <button ion-button icon-only clear item-end>
+          <img id="driveicon" src="assets/icon/Google-Drive-icon.png">
+        </button>
+      </ion-item>
+    </ion-list>
+    <ion-list class="listitem">
+      <ion-item>
+        <ion-label color="black" fixed>First Name</ion-label>
+        <ion-input placeholder="First Name"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list class="listitem">
+      <ion-item>
+        <ion-label color="black" fixed>Last Name</ion-label>
+        <ion-input placeholder="Last Name"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list class="listitem">
+      <ion-item>
+        <ion-label color="black" fixed>Phone</ion-label>
+        <ion-input type="number" placeholder="Phone"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list class="listitem">
+      <ion-item>
+        <ion-label color="black" fixed>Email</ion-label>
+        <ion-input type="email" placeholder="Email"></ion-input>
+      </ion-item>
+    </ion-list>  
+    <ion-list class="listitem">
+      <ion-item>
+        <ion-label color="black" fixed>Location
+        
+        </ion-label>
+        <button ion-button icon-only clear item-end id="locbtn" (click)="getlocation()">
+              <ion-icon name="md-navigate"></ion-icon>
+        </button>
+        <ion-input placeholder="Location" [(ngModel)]="locationName"></ion-input>
+        
+      </ion-item>
+    </ion-list>
+    <ion-list class="listitem">
+      <ion-item>
+        <ion-label color="black" fixed>Title
+          <p style="text-align: justify;color: red;font-size: 8px;">this feild is required</p>
+        </ion-label>
+        <ion-input placeholder="Title"></ion-input>
+        
+      </ion-item>
+    </ion-list>
+    <ion-list class="listitem">
+      <ion-item>
+        <ion-label color="black" fixed>Company</ion-label>
+        <ion-input placeholder="Eg Apple"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list class="listitem">
+      <ion-item>
+        <ion-label color="black" fixed>Education
+          <p style="text-align: justify;color: red;font-size: 8px;">this feild is required</p>
+        </ion-label>
+        <ion-input placeholder="University"></ion-input>
+      </ion-item>
+    </ion-list>
+  
   
 
 </ion-content>

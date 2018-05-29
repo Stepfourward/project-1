@@ -29,6 +29,10 @@ import { ModalPage } from '../pages/modal/modal';
 import { ValidateService } from '../services/validate.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {AuthService} from '../services/auth.service';
+import { AutoCompleteModule } from 'ionic2-auto-complete';
+import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
+import { PolicyPage } from '../pages/policy/policy';
+import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
 
 @NgModule({
   declarations: [
@@ -48,10 +52,15 @@ import {AuthService} from '../services/auth.service';
     SavedPage,
     IonTextAvatar,
     ModalPage,
+    ForgotPasswordPage,
+    PolicyPage,
+    TermsofusagePage
+    
   ],
   imports: [ 
     FormsModule, 
     BrowserModule,
+    AutoCompleteModule,
     IonicModule.forRoot(MyApp),
     FlashMessagesModule.forRoot(),
     HttpModule,
@@ -78,10 +87,10 @@ import {AuthService} from '../services/auth.service';
     AppliedPage,
     FailedPage,
     SavedPage,
-    ModalPage
-    
-    
-    
+    ModalPage,
+    ForgotPasswordPage,
+    PolicyPage,
+    TermsofusagePage 
   ],
   providers: [
     StatusBar,

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { FeedsPage } from './feeds';
 import { SwingModule } from 'angular2-swing';
+import { AutoCompleteModule } from 'ionic2-auto-complete';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { SwingModule } from 'angular2-swing';
   ],
   imports: [
     IonicPageModule.forChild(FeedsPage),
-    SwingModule
+    SwingModule,
+    AutoCompleteModule
   ],
 })
 export class FeedsPageModule {}

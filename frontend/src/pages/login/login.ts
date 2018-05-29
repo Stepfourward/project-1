@@ -1,17 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { LocationPage} from '../location/location';
 import { ValidateService } from '../../services/validate.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import {AuthService} from '../../services/auth.service';
+import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -26,7 +22,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private validateService: ValidateService,
     private flashMessage:FlashMessagesService,
-    private authService:AuthService,) {
+    private authService:AuthService,
+    public alertCtrl: AlertController) {
   }
 
   gotoHomepage() {
@@ -65,6 +62,33 @@ console.log(user);
       }
     });
     
+  }
+  fp() {
+    let prompt = this.alertCtrl.create({
+      title: 'Reset Password',
+      message: "Enter your email address to reset your password",
+      inputs: [
+        {
+          name: 'emailid',
+          placeholder: 'email ID'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Reset',
+          handler: data => {
+            this.navCtrl.push(ForgotPasswordPage);
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
 

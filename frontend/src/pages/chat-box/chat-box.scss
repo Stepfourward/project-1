@@ -4,24 +4,7 @@ page-chat-box {
         font-weight: 400;
 
     }
-    .msg {
-        word-break: keep-all;
-        width: 95%;
-        font-weight: bold;
-
-    }
-    .bubble {
-        padding-top: 2px;
-        padding-left: 10px;
-        background: #E8E8E8;
-        position: relative;
-        
-        height: 115px;
-        width: 220px;
-        margin-left: 15px;
-        margin-top: 7px;
-        border-radius: 14px;
-    }
+    
     
     .text-input {
         margin-left: 10px;
@@ -45,4 +28,13 @@ page-chat-box {
         background-color: white;
       }
     
+    .card {
+        border-radius: 15px;
+        background-color: #EAEAEA;
+        max-width: 80%;
+    }
+    .msg {
+        font-size: bold;
+        
+    }
 }

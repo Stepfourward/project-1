@@ -16,13 +16,12 @@ page-home {
 
 #desc1 {
 	position: relative;
-	
 	top: 80px;
 	font-size: 18px;
 }
 
-#desc2 {
-	left: 50px;
+.desc2 {
+	color: grey;
 	font-size: 10px;
 	position: relative;
 	top: 250px;
@@ -37,7 +36,8 @@ page-home {
 #linklogo {
 	position: relative;
 	top: 170px;
-	left: 50px;
+	
+	
 }
 ion-content{
 	background-color: white;
@@ -49,5 +49,6 @@ ion-content{
 .no-scroll .scroll-content{
 	overflow: hidden;
 }
+
 
 }
