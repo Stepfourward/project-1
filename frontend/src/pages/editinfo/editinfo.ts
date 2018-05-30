@@ -42,7 +42,7 @@ export class EditinfoPage {
       enableHighAccuracy: true
     };
     this.geolocation.getCurrentPosition(options).then((position: Geoposition) => {
-      this.getcountry(position);
+      this.locationName = this.getcountry(position);
       console.log(this.locationName);
     }).catch((err) => {
       console.log(err);
@@ -52,7 +52,7 @@ export class EditinfoPage {
   getcountry(pos) {
     this.nativeGeocoder.reverseGeocode(pos.coords.latitude, pos.coords.longitude)
     .then((res: NativeGeocoderReverseResult) => {
-      this.locationName = res.countryName + "," + res.locality;
+      return res.countryName + "," + res.locality;
     }).catch((err) => {
       console.log(err);
     });

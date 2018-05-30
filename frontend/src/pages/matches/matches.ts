@@ -4,12 +4,7 @@ import { AppliedPage } from '../applied/applied';
 import { FailedPage } from '../failed/failed';
 import { SavedPage } from '../saved/saved';
 
-/**
- * Generated class for the MatchesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -22,11 +17,20 @@ export class MatchesPage {
   tab2Root = FailedPage;
   tab3Root = SavedPage;
 
+  searchbar: boolean = true;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MatchesPage');
   }
+
+  //on click search icon search bar will appear
+  opensearchbar() {
+    this.searchbar = false;
+  }
+
+  
 
 }

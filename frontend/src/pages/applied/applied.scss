@@ -12,5 +12,14 @@ page-applied {
         position: relative;
         top: 5px;
     }
+    ion-avatar{
+        position: relative;
+        ion-icon{
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            color: rgb(23, 201, 23);
+        }
+    }
 
 }
