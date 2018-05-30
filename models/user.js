@@ -19,6 +19,12 @@ const UserSchema = mongoose.Schema({
       type: String,
       required: true
     }
+    // },
+    // phone:string,
+    // location: string,
+    // title:string,
+    // company:string,
+    // education:string,
   });
 
   const User = module.exports = mongoose.model('User', UserSchema);

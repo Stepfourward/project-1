@@ -23,7 +23,6 @@ export class LocationPage {
   }
 
   getLocation() {
-
   	this.geolocation.getCurrentPosition().then((resp) => {
   			this.latitude = resp.coords.latitude;
   			this.longitude = resp.coords.longitude;

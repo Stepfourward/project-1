@@ -1,6 +1,6 @@
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule, IonicPageModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -29,7 +29,10 @@ import { ModalPage } from '../pages/modal/modal';
 import { ValidateService } from '../services/validate.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {AuthService} from '../services/auth.service';
-import { AutoCompleteModule } from 'ionic2-auto-complete';
+import { NgZone } from '@angular/core';
+import { ValidationService } from './validation.service';
+import { ControlMessagesComponent } from './control-messages.component';
+import { HandleUserDataService } from '../services/handleUserData.service';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { PolicyPage } from '../pages/policy/policy';
 import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
@@ -52,20 +55,21 @@ import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
     SavedPage,
     IonTextAvatar,
     ModalPage,
+    ControlMessagesComponent,
     ForgotPasswordPage,
     PolicyPage,
     TermsofusagePage
-    
   ],
   imports: [ 
     FormsModule, 
     BrowserModule,
-    AutoCompleteModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(MyApp),
     FlashMessagesModule.forRoot(),
     HttpModule,
     SwingModule,
     IonicSwipeAllModule,
+    
     // IonicPageModule.forChild(RegisterPage)
    
     
@@ -76,7 +80,7 @@ import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
     MyApp,
     HomePage,
     RegisterPage,
-    LoginPage,
+    LoginPage,  
     LocationPage,
     NotificationPage,
     EditinfoPage,
@@ -96,11 +100,14 @@ import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
     StatusBar,
     SplashScreen,
     Geolocation,
+    HandleUserDataService,
     NativePageTransitions,
     ValidateService,
     NativeGeocoder,
     AuthService,
+    ValidationService, 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}
