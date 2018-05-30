@@ -1,5 +1,4 @@
 import { Component, ViewChild, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { LocationPage} from '../location/location';
@@ -33,6 +32,7 @@ export class LoginPage implements OnInit {
     private flashMessage:FlashMessagesService,
     private authService:AuthService,public lc: NgZone,
     private formBuilder: FormBuilder,
+    public alertCtrl: AlertController
     ) {
       this.userForm = this.formBuilder.group({
         'username': ['', Validators.required],
@@ -45,8 +45,8 @@ export class LoginPage implements OnInit {
   } 
   clearErr(event) {
     this.ErrorMsgStatus = false;
-    private authService:AuthService,
-    public alertCtrl: AlertController) {
+    // private authService:AuthService,
+    // public alertCtrl: AlertController) {
   }
   gotoHomepage() {
   	this.navCtrl.push(HomePage);
@@ -112,31 +112,32 @@ export class LoginPage implements OnInit {
       }
     });
   }
-  fp() {
-    let prompt = this.alertCtrl.create({
-      title: 'Reset Password',
-      message: "Enter your email address to reset your password",
-      inputs: [
-        {
-          name: 'emailid',
-          placeholder: 'email ID'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Reset',
-          handler: data => {
-            this.navCtrl.push(ForgotPasswordPage);
-          }
+ }
+ fp() {
+  let prompt = this.alertCtrl.create({
+    title: 'Reset Password',
+    message: "Enter your email address to reset your password",
+    inputs: [
+      {
+        name: 'emailid',
+        placeholder: 'email ID'
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: data => {
+          console.log('Cancel clicked');
         }
-      ]
-    });
-    prompt.present();
-  }
+      },
+      {
+        text: 'Reset',
+        handler: data => {
+          this.navCtrl.push(ForgotPasswordPage);
+        }
+      }
+    ]
+  });
+  prompt.present();
+}
 }

@@ -17,9 +17,9 @@ import { FeedsPage } from '../feeds/feeds';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-@Injectable()
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { NativeGeocoder, NativeGeocoderReverseResult } from '@ionic-native/native-geocoder';
+@Injectable()
 @IonicPage()
 @Component({
   selector: 'page-editinfo',
