@@ -18,16 +18,25 @@ const UserSchema = mongoose.Schema({
     password: {
       type: String,
       required: true
+    },
+    phone: {
+      type: String
+    },
+    location: {
+      type: String
+    },
+    title:{
+      type: String
+    },
+    company:{
+      type: String
+    },
+    education:{
+      type: String
     }
-    // },
-    // phone:string,
-    // location: string,
-    // title:string,
-    // company:string,
-    // education:string,
   });
-
-  const User = module.exports = mongoose.model('User', UserSchema);
+  
+const User = module.exports = mongoose.model('User', UserSchema);
 
   module.exports.getUserById = function(id, callback){
     User.findById(id, callback);

@@ -61,9 +61,9 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     // this.rbar.open();
+    
    }
   goBack() {
-
   	this.navCtrl.pop();
   }
 
@@ -72,20 +72,23 @@ export class RegisterPage implements OnInit {
   }
 
   onRegisterSubmit(){
+    console.log('submit clickd');
     const user = {
       name: this.name,
       email: this.email,
       username: this.username,
-      password: this.password
-      // phone:this.phone,
-      // location:this.location,
-      // title:this.title,
-      // company:this.company,
-      // education:this.education
+      password: this.password,
+      phone:this.phone,
+      location:this.location,
+      title:this.title,
+      company:this.company,
+      education:this.education
     }
     
    this.userDataService.getUserData(user);
+   console.log(user);
     if (this.userForm.dirty && this.userForm.valid) {
+      console.log('asd');
 // Required Fields
 if(!this.validateService.validateRegister(user)){
   this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 4000});
@@ -100,13 +103,16 @@ if(!this.validateService.validateEmail(user.email)){
   return false;
 }
 // Register user
+console.log('sdsd00');
 this.authService.registerUser(user).subscribe(data => {
+  console.log('data',data);
   if(data.success){
    this.flashMessage.show('You are now successfully registered, redirecting to Login page..', {cssClass: 'alert-success', timeout: 4000});
-   //setTimeout(function(){
-    this.navCtrl.push(LoginPage);
-  // },4000)
-   
+  setTimeout(() => {
+    this.navCtrl.push(LoginPage, {
+        duration: 200, // The length in milliseconds the animation should take.
+    });
+  },2500);
    console.log('sucess');
   } else {
     this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 4000});

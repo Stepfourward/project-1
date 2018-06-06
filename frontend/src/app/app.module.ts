@@ -36,6 +36,9 @@ import { HandleUserDataService } from '../services/handleUserData.service';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { PolicyPage } from '../pages/policy/policy';
 import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
+// import { AuthGuard } from './guards/auth.guard';
+import { File } from '@ionic-native/file';
+import { FileChooser } from '@ionic-native/file-chooser';
 
 @NgModule({
   declarations: [
@@ -105,6 +108,9 @@ import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
     ValidateService,
     NativeGeocoder,
     AuthService,
+    File,
+    FileChooser,
+   // AuthGuard,
     ValidationService, 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
