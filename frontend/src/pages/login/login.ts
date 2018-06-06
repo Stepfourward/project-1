@@ -1,6 +1,5 @@
 import { Component, ViewChild, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { LocationPage} from '../location/location';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -33,6 +32,8 @@ export class LoginPage implements OnInit {
     private flashMessage:FlashMessagesService,
     private authService:AuthService,public lc: NgZone,
     private formBuilder: FormBuilder,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController
     ) {
       this.userForm = this.formBuilder.group({
         'username': ['', Validators.required],
@@ -45,8 +46,8 @@ export class LoginPage implements OnInit {
   } 
   clearErr(event) {
     this.ErrorMsgStatus = false;
-    private authService:AuthService,
-    public alertCtrl: AlertController) {
+    // private authService:AuthService,
+    // public alertCtrl: AlertController) {
   }
   gotoHomepage() {
   	this.navCtrl.push(HomePage);
@@ -94,12 +95,22 @@ export class LoginPage implements OnInit {
       if(data.success){
       this.authService.storeUserData(data.token, data.user);
       this.toggleFlashMsgsVariable = true;
-      this.flashMessage.show('You are now logged in', {
-      cssClass: 'alert-success',
-      timeout: 5000});
+      let loader = this.loadingCtrl.create({
+        content: "Logging in...",
+        duration: 1200
+      });
+      loader.present();
+      // this.flashMessage.show('You are now logged in', {
+      // cssClass: 'alert-success',
+      // timeout: 5000});
       // this.router.navigate(['dashboard']);
       //  this.toggleFlashMsgsVariable = false;
-      this.navCtrl.push(LocationPage);
+      setTimeout(() => {
+        this.navCtrl.push(LocationPage, {
+            duration: 200, // The length in milliseconds the animation should take.
+        });
+      },1450);
+     // this.navCtrl.push(LocationPage);
       } else {
       this.toggleFlashMsgsVariable = true;
       this.flashMessage.show(data.msg, {
@@ -112,31 +123,32 @@ export class LoginPage implements OnInit {
       }
     });
   }
-  fp() {
-    let prompt = this.alertCtrl.create({
-      title: 'Reset Password',
-      message: "Enter your email address to reset your password",
-      inputs: [
-        {
-          name: 'emailid',
-          placeholder: 'email ID'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Reset',
-          handler: data => {
-            this.navCtrl.push(ForgotPasswordPage);
-          }
+ }
+ fp() {
+  let prompt = this.alertCtrl.create({
+    title: 'Reset Password',
+    message: "Enter your email address to reset your password",
+    inputs: [
+      {
+        name: 'emailid',
+        placeholder: 'email ID'
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: data => {
+          console.log('Cancel clicked');
         }
-      ]
-    });
-    prompt.present();
-  }
+      },
+      {
+        text: 'Reset',
+        handler: data => {
+          this.navCtrl.push(ForgotPasswordPage);
+        }
+      }
+    ]
+  });
+  prompt.present();
+}
 }

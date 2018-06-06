@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { IonicPage, NavController, NavParams, ToastController  } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NotificationPage } from '../notification/notification';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
@@ -9,7 +9,7 @@ import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResul
   selector: 'page-location',
   templateUrl: 'location.html',
 })
-export class LocationPage {
+export class LocationPage implements OnInit{
 
 	latitude: any;
 	longitude: any;
@@ -18,8 +18,18 @@ export class LocationPage {
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      private geolocation: Geolocation,
-     public nativeGeocoder: NativeGeocoder 
+     public nativeGeocoder: NativeGeocoder,
+     public toastCtrl: ToastController
     ) {
+     
+  }
+  ngOnInit() {
+    let toast = this.toastCtrl.create({
+      message: 'You are now logged in',
+      duration: 2500,
+      position: 'top'
+    });
+    toast.present();
   }
 
   getLocation() {

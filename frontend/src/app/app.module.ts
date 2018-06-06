@@ -33,10 +33,12 @@ import { NgZone } from '@angular/core';
 import { ValidationService } from './validation.service';
 import { ControlMessagesComponent } from './control-messages.component';
 import { HandleUserDataService } from '../services/handleUserData.service';
-import { AutoCompleteModule } from 'ionic2-auto-complete';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { PolicyPage } from '../pages/policy/policy';
 import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
+// import { AuthGuard } from './guards/auth.guard';
+import { File } from '@ionic-native/file';
+import { FileChooser } from '@ionic-native/file-chooser';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,7 @@ import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
     SavedPage,
     IonTextAvatar,
     ModalPage,
-    ControlMessagesComponent
+    ControlMessagesComponent,
     ForgotPasswordPage,
     PolicyPage,
     TermsofusagePage
@@ -65,7 +67,6 @@ import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
     FormsModule, 
     BrowserModule,
     ReactiveFormsModule,
-    AutoCompleteModule,
     IonicModule.forRoot(MyApp),
     FlashMessagesModule.forRoot(),
     HttpModule,
@@ -107,6 +108,9 @@ import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
     ValidateService,
     NativeGeocoder,
     AuthService,
+    File,
+    FileChooser,
+   // AuthGuard,
     ValidationService, 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],

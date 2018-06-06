@@ -21,7 +21,8 @@
   <p style="font-size: 10px;color: grey;text-align:center" >Attach your resumes or fill the fill the feilds below</p>
   <ion-list>
     <ion-item>
-      <button ion-button clear item-start id="impbtn">Import Resume</button>
+      <button ion-button clear item-start id="impbtn" (click)="browseFile()"><i class="fas fa fa-upload"></i></button>
+      <span>Import Resume</span>
       <button ion-button icon-only clear item-end>
         <ion-icon name="logo-dropbox"></ion-icon>
       </button>
@@ -46,7 +47,7 @@
           <ion-list class="listitem">
               <ion-item>
                 <ion-label color="black" fixed>Phone</ion-label>
-                <ion-input type="tel" formControlName="phone" name="phone"  placeholder="Phone"></ion-input>
+                <ion-input type="tel" formControlName="phone" name="phone"  [(ngModel)]="userSpecificData.phone" placeholder="Phone"></ion-input>
               </ion-item>
               <control-messages [control]="EditPageUserForm.controls.phone" class="control-messages"></control-messages>
           </ion-list>
@@ -65,7 +66,7 @@
                 <button ion-button icon-only clear item-end id="locbtn">
                       <ion-icon name="md-navigate"></ion-icon>
                 </button>
-                <ion-input placeholder="Location" formControlName="location" name="location" ></ion-input>
+                <ion-input placeholder="Location" [(ngModel)]="userSpecificData.location" formControlName="location" name="location" ></ion-input>
               </ion-item>
               <control-messages [control]="EditPageUserForm.controls.location" class="control-messages"></control-messages>
           </ion-list>
@@ -74,14 +75,14 @@
                 <ion-label color="black" fixed>Title
                   <p style="text-align: justify;color: red;font-size: 8px;">this feild is required</p>
                 </ion-label>
-                <ion-input placeholder="Title" formControlName="title"  name="title" [(ngModel)]="title"></ion-input>
+                <ion-input placeholder="Title" formControlName="title"  name="title" [(ngModel)]="userSpecificData.title"></ion-input>
               </ion-item>
               <control-messages [control]="EditPageUserForm.controls.title" class="control-messages"></control-messages>
           </ion-list>
           <ion-list class="listitem">
               <ion-item>
                 <ion-label color="black" fixed>Company</ion-label>
-                <ion-input placeholder="Eg Apple" formControlName="company" name="company" [(ngModel)]="company"></ion-input>
+                <ion-input placeholder="Eg Apple" formControlName="company" name="company" [(ngModel)]="userSpecificData.company"></ion-input>
               </ion-item>
               <control-messages [control]="EditPageUserForm.controls.company" class="control-messages"></control-messages>
           </ion-list>
@@ -90,7 +91,7 @@
               <ion-label color="black" fixed>Education
                 <p style="text-align: justify;color: red;font-size: 8px;">this feild is required</p>
               </ion-label>
-              <ion-input placeholder="University" formControlName="education" name="education" [(ngModel)]="education"></ion-input>
+              <ion-input placeholder="University" formControlName="education" name="education" [(ngModel)]="userSpecificData.education"></ion-input>
             </ion-item>
             <control-messages [control]="EditPageUserForm.controls.education" class="control-messages"></control-messages>
           </ion-list>
