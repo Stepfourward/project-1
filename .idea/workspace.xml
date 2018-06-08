@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dc9e478f-cc45-4c90-a089-200f580855bb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/frontend/config.xml" afterPath="$PROJECT_DIR$/frontend/config.xml" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" afterPath="$PROJECT_DIR$/frontend/package-lock.json" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" afterPath="$PROJECT_DIR$/frontend/package.json" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/editinfo/editinfo.html" afterPath="$PROJECT_DIR$/frontend/src/pages/editinfo/editinfo.html" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/editinfo/editinfo.scss" afterPath="$PROJECT_DIR$/frontend/src/pages/editinfo/editinfo.scss" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/editinfo/editinfo.ts" afterPath="$PROJECT_DIR$/frontend/src/pages/editinfo/editinfo.ts" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/location/location.ts" afterPath="$PROJECT_DIR$/frontend/src/pages/location/location.ts" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/login/login.ts" afterPath="$PROJECT_DIR$/frontend/src/pages/login/login.ts" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/register/register.html" afterPath="$PROJECT_DIR$/frontend/src/pages/register/register.html" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/register/register.ts" afterPath="$PROJECT_DIR$/frontend/src/pages/register/register.ts" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/auth.service.ts" afterPath="$PROJECT_DIR$/frontend/src/services/auth.service.ts" />
-      <change beforePath="$PROJECT_DIR$/models/user.js" afterPath="$PROJECT_DIR$/models/user.js" />
-      <change beforePath="$PROJECT_DIR$/routes/users.js" afterPath="$PROJECT_DIR$/routes/users.js" />
-    </list>
+    <list default="true" id="dc9e478f-cc45-4c90-a089-200f580855bb" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
