@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { JobActionsProvider } from '../../providers/job-actions/job-actions';
 
-/**
- * Generated class for the FailedPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +10,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FailedPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  failedjobs: Array<any> = [];
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, public jobfailList: JobActionsProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FailedPage');
+    console.log('Failed jobs Page');
+    // getting jobs from job-actions file and displaying
+    this.jobfailList.getfailedjobList().then((data) => {
+      console.log('displaying failed job list' + data);
+       for (let result of data) {
+         this.failedjobs.push(result);
+         console.log(this.failedjobs);
+       }
+    });
   }
 
 }

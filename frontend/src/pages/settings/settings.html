@@ -20,13 +20,13 @@
         <button ion-item>
           <ion-label>Frequently Asked Questions</ion-label>
         </button>
-        <button ion-item>
+        <button ion-item (click)="gotoTermsPage()">
           <ion-label>Terms and Usage</ion-label>
         </button>
         <button ion-item>
           <ion-label>Help and Feedback</ion-label>
         </button>
-        <button ion-item>
+        <button ion-item (click)="gotoPolicyPage()">
           <ion-label>Privacy Policy</ion-label>
         </button>
       </ion-list>
@@ -40,7 +40,7 @@
         <button ion-item>
           <ion-label>Communications</ion-label>
         </button>
-        <button ion-item detail-none>
+        <button ion-item detail-none (click)="deleteAccount()">
           <ion-label style="color: red;">Delete my Account</ion-label>
         </button>
         <button ion-item detail-none (click)="onLogOutClick()">

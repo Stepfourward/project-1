@@ -21,37 +21,37 @@
 		</ion-list>
 	</div>	
 	<div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutleft)="voteUp(false)" (throwoutright)="voteUp(true)" id="card-stack" >
-		<ion-card #mycards1 swing-card >
+		<ion-card #mycards1 swing-card *ngFor="let card of cards">
 			<div >
-				<img src="assets/imgs/lap.jpg" (click)="openPage()" id="tagimg">
-				<div class="textoncard title" >PlainIT Search</div>
-				<div class="textoncard subt">Software developer</div>
+				<img src="assets/imgs/lap.jpg" (click)="launchjobDescriptionPage(card)" id="tagimg">
+				<div class="textoncard title" >{{ card.company }}</div>
+				<div class="textoncard subt">{{ card.jobtitle }}</div>
 				<div class="textoncard time">2 days ago</div>
 			</div>
 			<ion-card-content>
 				<table>
 					<tr>
 						<td class="label">Location</td>
-						<td class="des">Canada</td>
+						<td class="des">{{ card.location }}</td>
 					</tr>
 					<tr>
 						<td class="label">Type</td>
-						<td class="des">Full-time</td>
+						<td class="des">{{ card.jobtype }}</td>
 					</tr>
 					<tr>
 						<td class="label">salary</td>
-						<td class="des">Not specified</td>
+						<td class="des">{{ card.jobtype }}</td>
 					</tr>
 					<tr>
 						<td class="label">Description</td>
-						<td class="des">this is des this is des this is des this is des</td>
+						<td class="des lmt">{{ card.jobdescrition.substring(0, 75) }}</td>
 					</tr>
 					<tr>
 						<td class="label">Source</td>
 						<td class="des"><p style="color: purple;font-weight: bold;">Monster</p></td>
 					</tr>
 				</table>
-				<div id="endbtn">
+				<!-- <div id="endbtn">
 					<ion-buttons class="ionrow">
 						
 						<button ion-button icon-only clear (tap)="tapEvent($event)" [ngStyle]="{'color': buttonColor}">
@@ -66,7 +66,7 @@
 						</button> 
 						
 					</ion-buttons>
-				</div>
+				</div> -->
 			</ion-card-content>
 		</ion-card>
 	</div>	

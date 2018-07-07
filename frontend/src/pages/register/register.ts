@@ -12,12 +12,7 @@ import { HandleUserDataService } from '../../services/handleUserData.service';
  import { PolicyPage } from '../policy/policy';
 import { TermsofusagePage } from '../termsofusage/termsofusage';
 
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 @Injectable()
 @IonicPage({
   name: 'page-register',
@@ -72,16 +67,17 @@ export class RegisterPage implements OnInit {
   }
 
   onRegisterSubmit(){
+    console.log('submit clickd');
     const user = {
       name: this.name,
       email: this.email,
       username: this.username,
-      password: this.password
-      // phone:this.phone,
-      // location:this.location,
-      // title:this.title,
-      // company:this.company,
-      // education:this.education
+      password: this.password,
+      phone:this.phone,
+      location:this.location,
+      title:this.title,
+      company:this.company,
+      education:this.education
     }
     
    this.userDataService.getUserData(user);
@@ -100,13 +96,16 @@ if(!this.validateService.validateEmail(user.email)){
   return false;
 }
 // Register user
+console.log('sdsd00');
 this.authService.registerUser(user).subscribe(data => {
+  console.log('data',data);
   if(data.success){
    this.flashMessage.show('You are now successfully registered, redirecting to Login page..', {cssClass: 'alert-success', timeout: 4000});
-   //setTimeout(function(){
-    this.navCtrl.push(LoginPage);
-  // },4000)
-   
+  setTimeout(() => {
+    this.navCtrl.push(LoginPage, {
+        duration: 200, // The length in milliseconds the animation should take.
+    });
+  },2500);
    console.log('sucess');
   } else {
     this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout: 4000});

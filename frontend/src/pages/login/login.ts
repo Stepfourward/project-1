@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { LocationPage} from '../location/location';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidateService } from '../../services/validate.service';
 import { ValidationService } from '../../app/validation.service';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
+import { JobsDataProvider } from '../../providers/jobs-data/jobs-data';
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -32,7 +33,9 @@ export class LoginPage implements OnInit {
     private flashMessage:FlashMessagesService,
     private authService:AuthService,public lc: NgZone,
     private formBuilder: FormBuilder,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
+    public jobs: JobsDataProvider
     ) {
       this.userForm = this.formBuilder.group({
         'username': ['', Validators.required],
@@ -89,30 +92,40 @@ export class LoginPage implements OnInit {
     password: this.password
     }
 
-  if (this.userForm.dirty && this.userForm.valid) {
-    this.authService.authenticateUser(user).subscribe(data => {
-      if(data.success){
-      this.authService.storeUserData(data.token, data.user);
-      this.toggleFlashMsgsVariable = true;
-      this.flashMessage.show('You are now logged in', {
-      cssClass: 'alert-success',
-      timeout: 5000});
-      // this.router.navigate(['dashboard']);
-      //  this.toggleFlashMsgsVariable = false;
-      this.navCtrl.push(LocationPage);
-      } else {
-      this.toggleFlashMsgsVariable = true;
-      this.flashMessage.show(data.msg, {
-      cssClass: 'alert-danger',
-      timeout: 55000});
-      //      this.toggleFlashMsgsVariable = false;
-      // this.router.navigate(['login']);
-      this.ErrorMsgStatus = true;
-      return false;
-      }
-    });
-  }
- }
+    if (this.userForm.dirty && this.userForm.valid) {
+      this.authService.authenticateUser(user).subscribe(data => {
+        if(data.success){
+        this.authService.storeUserData(data.token, data.user);
+        this.toggleFlashMsgsVariable = true;
+        let loader = this.loadingCtrl.create({
+          content: "Logging in...",
+          duration: 1200
+        });
+        loader.present();
+        // this.flashMessage.show('You are now logged in', {
+        // cssClass: 'alert-success',
+        // timeout: 5000});
+        // this.router.navigate(['dashboard']);
+        //  this.toggleFlashMsgsVariable = false;
+        setTimeout(() => {
+          this.navCtrl.push(LocationPage, {
+              duration: 200, // The length in milliseconds the animation should take.
+          });
+        },1450);
+       // this.navCtrl.push(LocationPage);
+        } else {
+        this.toggleFlashMsgsVariable = true;
+        this.flashMessage.show(data.msg, {
+        cssClass: 'alert-danger',
+        timeout: 55000});
+        //      this.toggleFlashMsgsVariable = false;
+        // this.router.navigate(['login']);
+        this.ErrorMsgStatus = true;
+        return false;
+        }
+      });
+    }
+   }
  fp() {
   let prompt = this.alertCtrl.create({
     title: 'Reset Password',
@@ -121,6 +134,7 @@ export class LoginPage implements OnInit {
       {
         name: 'emailid',
         placeholder: 'email ID'
+        
       },
     ],
     buttons: [
@@ -131,13 +145,29 @@ export class LoginPage implements OnInit {
         }
       },
       {
-        text: 'Reset',
+        text: 'OK',
         handler: data => {
-          this.navCtrl.push(ForgotPasswordPage);
+          this.emailVerify(data.emailid) 
         }
       }
     ]
   });
   prompt.present();
 }
+
+  emailVerify(email) {
+    console.log(email);
+    this.authService.forgotpasswordMail(email).subscribe((data) => {
+      if(data.success) {
+        console.log(data.msg);
+        const emailobj = {
+          emailid: email
+        }
+        this.navCtrl.push(ForgotPasswordPage,emailobj);
+      }
+      else {
+        console.log(data.msg);
+      }
+    })
+  }
 }

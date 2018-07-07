@@ -11,6 +11,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationService } from '../../app/validation.service';
 import { HandleUserDataService } from '../../services/handleUserData.service';
 import { FeedsPage } from '../feeds/feeds';
+import { File } from '@ionic-native/file';
+import { FileChooser } from '@ionic-native/file-chooser';
+
 /**
  * Generated class for the EditinfoPage page.
  *
@@ -26,7 +29,6 @@ import { NativeGeocoder, NativeGeocoderReverseResult } from '@ionic-native/nativ
   templateUrl: 'editinfo.html',
 })
 export class EditinfoPage implements OnInit {
-  userSpecificData:object = {name: "", email: "", username: ""};
   currentUserData:any;
   editInfoData: any;
   errMsg:string;
@@ -43,7 +45,8 @@ export class EditinfoPage implements OnInit {
   company:string;
   education:string;
   locationName: any;
-
+  userSpecificData:any = {_id:'-',name: '-', email: '-', username: '-', password: '-', phone: '-',education:'-',location:'-',title:'-',company:'-'}
+  
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -53,7 +56,9 @@ export class EditinfoPage implements OnInit {
     private formBuilder: FormBuilder,
     public userDataService: HandleUserDataService,
     private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder
+    private nativeGeocoder: NativeGeocoder,
+    //private file: File,
+    //private fileChooser: FileChooser
               ) {
       this.EditPageUserForm = this.formBuilder.group({
         'name': ['', Validators.required],
@@ -69,10 +74,6 @@ export class EditinfoPage implements OnInit {
   ionViewDidLoad() {
   }
   ngOnInit() {
-    this.currentUserData = {name: "aleem", email: "shaikaleem.aleem@gmail.com", username: "shak", password: "123456"}
-    //this.currentUserData = this.userDataService.IncomingUserData;
-    console.log(this.currentUserData)
-
     this.userDataService.userDataHandler.subscribe (
       data => this.editInfoData = data,
       error => this.errMsg = error.statusText
@@ -81,15 +82,23 @@ export class EditinfoPage implements OnInit {
 
     this.authService.getProfile().subscribe( profile => {
      this.userSpecificData = profile.user
-     console.log(this.userSpecificData)
+     console.log(profile.user);
+     //console.log(this.userSpecificData)
     },
     err => {
       console.log(err);
       return false;
     });
-    
+
+    //this.file.checkDir(this.file.dataDirectory, 'mydir').then(_ => console.log('Directory exists')).catch(err => console.log('Directory doesn\'t exist'));
     
   }
+  
+  // browseFile() {
+  //   this.fileChooser.open()
+  //   .then(uri => console.log(uri))
+  //   .catch(e => console.log(e));
+  // }
 
   toSlides() {
   	this.navCtrl.push(SlidesPage);
@@ -97,16 +106,18 @@ export class EditinfoPage implements OnInit {
 
   onEditFormSubmit(){
     const user = {
-      name: this.name,
-      email: this.email,
-      username: this.username,
-      password: this.password,
-      phone:this.phone,
-      location:this.location,
-      title:this.title,
-      company:this.company,
-      education:this.education
+      _id:this.userSpecificData._id,
+      name: this.userSpecificData.name,
+      email: this.userSpecificData.email,
+      username: this.userSpecificData.username,
+      password: this.userSpecificData.password,
+      phone:this.userSpecificData.phone,
+      location:this.userSpecificData.location,
+      title:this.userSpecificData.title,
+      company:this.userSpecificData.company,
+      education:this.userSpecificData.education
     }
+    console.log(user);
     
    // this.userDataService.getUserData(user);
     if (this.EditPageUserForm.dirty && this.EditPageUserForm.valid) {
@@ -118,14 +129,15 @@ export class EditinfoPage implements OnInit {
           // }
 
           // Validate Email
-          if(!this.validateService.validateEmail(user.email)){
-            this.flashMessage.show('Please use a valid email', {cssClass: 'alert-danger', timeout: 4000});
-            this.flashMessage.grayOut(true);
-            return false;
-          }
+          // if(!this.validateService.validateEmail(user.email)){
+          //   this.flashMessage.show('Please use a valid email', {cssClass: 'alert-danger', timeout: 4000});
+          //   this.flashMessage.grayOut(true);
+          //   return false;
+          // }
 
           // Register user
-          this.authService.registerUser(user).subscribe(data => {
+          this.authService.updateUserData(user).subscribe(data => {
+            console.log(data);
             if(data.success){
             this.flashMessage.show('You are now successfully registered, redirecting to Login page..', {cssClass: 'alert-success', timeout: 4000});
             //setTimeout(function(){
@@ -152,7 +164,7 @@ export class EditinfoPage implements OnInit {
       enableHighAccuracy: true
     };
     this.geolocation.getCurrentPosition(options).then((position: Geoposition) => {
-      this.locationName = this.getcountry(position);
+      this.getcountry(position);
       console.log(this.locationName);
     }).catch((err) => {
       console.log(err);
@@ -162,7 +174,7 @@ export class EditinfoPage implements OnInit {
   getcountry(pos) {
     this.nativeGeocoder.reverseGeocode(pos.coords.latitude, pos.coords.longitude)
     .then((res: NativeGeocoderReverseResult) => {
-      return res.countryName + "," + res.locality;
+      this.locationName = res.countryName + "," + res.locality;
     }).catch((err) => {
       console.log(err);
     });

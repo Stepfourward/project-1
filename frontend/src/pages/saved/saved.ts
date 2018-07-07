@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { JobActionsProvider } from '../../providers/job-actions/job-actions';
 
-/**
- * Generated class for the SavedPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +10,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SavedPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  savedjobs: Array<any> = [];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+  private joblist: JobActionsProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SavedPage');
+    console.log('SavedPage');
+    //getting and displaying the saved jobs
+    this.joblist.getSavedjoblslist().then((data) =>  {
+      console.log('displaying saved jobs ' + data);
+      for(let values of data) {
+        this.savedjobs.push(values);
+      }
+    });
   }
 
 }

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { AlertController } from 'ionic-angular';
 import { NativePageTransitions, NativeTransitionOptions} from '@ionic-native/native-page-transitions';
 import { JobDetailPage } from '../job-detail/job-detail';
-
+import { JobsDataProvider } from '../../providers/jobs-data/jobs-data';
 import { ModalPage } from '../modal/modal';
 import {
   StackConfig,
@@ -11,9 +11,7 @@ import {
   SwingStackComponent,
   SwingCardComponent
 } from 'angular2-swing';
-import { HttpClient } from '@angular/common/http';
-import { AppliedPage } from '../applied/applied';
-import { AutoCompleteModule } from 'ionic2-auto-complete';
+import { JobActionsProvider } from '../../providers/job-actions/job-actions';
 
 @IonicPage()
 @Component({
@@ -21,22 +19,26 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
   templateUrl: 'feeds.html',
 })
 export class FeedsPage {
+
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
   stackConfig: StackConfig;
   recentCard: string = '';
-  cards: Array<any>;
+  cards: Array<any> = [];
   buttonColor: string = '#F2F0F4';
-  public press: number = 0;
+  likeSymbol: boolean = false;
   jobtitletosave: string;
   showdropdown: boolean = false;
   searchQuery: string = '';
   items: string[];
+  jdetails: Array<any> = [];
   
-  constructor(public navCtrl: NavController, 
+  constructor( public navCtrl: NavController, 
     public navParams: NavParams, 
     public modalCtrl: ModalController,
-    private nativePageTransitions: NativePageTransitions
+    private nativePageTransitions: NativePageTransitions,
+    public jobdetail: JobsDataProvider,
+    public joblist: JobActionsProvider
     )
    {
     this.stackConfig = {
@@ -57,9 +59,10 @@ export class FeedsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FeedsPage');
+    
   }
 
-  openPage() {
+  launchjobDescriptionPage(card) {
     let options: NativeTransitionOptions = {
       direction: 'down',
       duration: 100,
@@ -68,8 +71,9 @@ export class FeedsPage {
       androiddelay: 50, 
     }
     this.nativePageTransitions.fade(options);
-    this.navCtrl.push(JobDetailPage);
+    this.navCtrl.push(JobDetailPage,card);
   }
+  // filter page
   showAlert() {
     let modal = this.modalCtrl.create(ModalPage);
     modal.present();
@@ -81,6 +85,11 @@ export class FeedsPage {
       event.target.style.background = '#ffffff';
     });
     
+    this.jobdetail.getJobDetails().then((data) => {
+      this.jdetails = data;
+      //console.log(this.jdetails);
+      this.addnewCards();
+    });
   }
   onItemMove(element, x, y, r) {
     let color = '';
@@ -109,17 +118,10 @@ export class FeedsPage {
 
     return hex;
   }
-  voteUp(like: boolean) {
-    this.jobtitletosave = 'plain IT solutions';
-    
-  }
-  getjobtitle() {
-    return this.jobtitletosave;
-  }
-  
+  //like symbol
   tapEvent(e) {
-    this.press++;
-    if (this.press % 2 != 0 ) {
+    this.likeSymbol = true;
+    if(this.likeSymbol) {
       this.buttonColor = '#E24B4B';
     }
     else {
@@ -157,6 +159,22 @@ export class FeedsPage {
     }
   }
 
+  // swiping cards
+  voteUp(like: boolean) {
+    let removedCard = this.cards.pop();
+    if (like) {
+      console.log('you have liked '+ removedCard.jobtitle + ' '+ removedCard.company + ' '+ removedCard.location);
+      this.joblist.addJobList(removedCard);
+    } else {
+      console.log('you have disliked '+ removedCard.jobtitle+ ' '+ removedCard.companyName + ' '+ removedCard.location);
+      this.joblist.addfailedJobList(removedCard);
+    }
+  }
+  // add new cards
+  addnewCards() {
+    for (let val of this.jdetails) {
+      this.cards.push(val);
+    }
+  }
+
 }
-
-

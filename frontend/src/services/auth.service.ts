@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
+// import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
@@ -9,7 +10,7 @@ export class AuthService {
 
   constructor(private http:Http) { }
 
-  registerUser(user){
+  registerUser(user) {
     let headers = new Headers();
     console.log(headers,user);
     headers.append('Content-Type','application/json');
@@ -35,7 +36,7 @@ export class AuthService {
     let headers = new Headers();
     console.log(headers,user);
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/update', user,{headers: headers})
+    return this.http.put('http://localhost:3000/api/user/' + user._id, user,{headers: headers})
       .map(res => res.json());
   }
 
@@ -50,10 +51,43 @@ export class AuthService {
     this.authToken = token;
     this.user = user;
   }
+  // for mail verification
+  forgotpasswordMail(email) {
+    console.log(email);
+    let emailId = {
+      email: email
+    }
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+     return this.http.post('http://localhost:3000/api/forgot',emailId,{headers: headers})
+    .map(res => res.json());
+  }
+
+  resetPassword(passwordData) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.put('http://localhost:3000/api/forgotpassword/'+passwordData.emailId,passwordData,{headers: headers})
+    .map(res => res.json());
+  }
+
+
+  loggedIn(){
+
+  //  return tokenNotExpired();
+  }
 
   logout(){
     this.authToken = null;
     this.user = null;
     localStorage.clear();
   }
+
+  updateProfile(userProfiledata) {
+    let headers = new Headers();
+    //console.log(headers,user);
+    headers.append('Content-Type','application/json');
+    return this.http.put('http://localhost:3000/api/profile/' + userProfiledata._id, userProfiledata,{headers: headers})
+      .map(res => res.json());
+  }
+
 }

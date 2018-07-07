@@ -13,22 +13,14 @@
 
 <ion-content>
     <ion-list>
-        <ion-item>
+        <ion-item *ngFor="let savedjob of savedjobs">
             <ion-avatar item-start>
-                <ion-text-avatar shape="round" class="avatar font">R</ion-text-avatar>
+                <ion-text-avatar shape="round" class="avatar font">
+                  {{ savedjob.companyTitle.charAt(0) }}
+                </ion-text-avatar>
             </ion-avatar>
-          <h6>Randstad</h6>
-          <p id="p">Core Java/Python Developer, Toronto, Canada</p>
+          <h6>{{ savedjob.companyTitle }}</h6>
+          <p id="p">{{ savedjob.jobTitle }}</p>
         </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-              <ion-text-avatar shape="round" class="avatar">S</ion-text-avatar>
-            </ion-avatar>
-          <h6>Stad</h6>
-          <p id="p">Core Java/Python Developer, Toronto, Canada</p>
-        </ion-item>
-        
-       
-      
       </ion-list>
 </ion-content>

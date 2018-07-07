@@ -36,6 +36,11 @@ import { HandleUserDataService } from '../services/handleUserData.service';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { PolicyPage } from '../pages/policy/policy';
 import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
+import { JobsDataProvider } from '../providers/jobs-data/jobs-data';
+import { JobActionsProvider } from '../providers/job-actions/job-actions';
+import { File } from '@ionic-native/file';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -106,7 +111,11 @@ import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
     NativeGeocoder,
     AuthService,
     ValidationService, 
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    JobsDataProvider,
+    JobActionsProvider,
+    File,FileChooser,Camera
+    
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

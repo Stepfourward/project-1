@@ -4,28 +4,59 @@ const config = require('../config/database');
 
 // User Schema
 const UserSchema = mongoose.Schema({
-    name: {
-      type: String
-    },
-    email: {
-      type: String,
-      required: true
-    },
-    username: {
-      type: String,
-      required: true
-    },
-    password: {
-      type: String,
-      required: true
-    }
-    // },
-    // phone:string,
-    // location: string,
-    // title:string,
-    // company:string,
-    // education:string,
-  });
+  name: {
+    type: String
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  phone: {
+    type: String
+  },
+  location: {
+    type: String
+  },
+  title:{
+    type: String
+  },
+  company:{
+    type: String
+  },
+  education:{
+    type: String
+  },
+  resetPasswordToken: {
+    type: String
+  },
+  resetPasswordExpires: {
+    type: Date
+  },
+  resume: {
+    data: Buffer,
+    contentType: String
+  },
+  profilePic: {
+    data: Buffer,
+    contentType: String
+  },
+  about: {
+    type: String
+  },
+  expirence: {
+    type: String
+  }
+});
 
   const User = module.exports = mongoose.model('User', UserSchema);
 
