@@ -81,13 +81,22 @@ export class AuthService {
     this.user = null;
     localStorage.clear();
   }
-
+  // to update the user profile
   updateProfile(userProfiledata) {
     let headers = new Headers();
     //console.log(headers,user);
     headers.append('Content-Type','application/json');
     return this.http.put('http://localhost:3000/api/profile/' + userProfiledata._id, userProfiledata,{headers: headers})
       .map(res => res.json());
+  }
+
+  // delete the user
+  deleteUser(userId) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.delete('http://localhost:3000/users/register/' + userId,{headers: headers})
+    .map(res => res.json());
+
   }
 
 }

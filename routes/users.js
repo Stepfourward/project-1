@@ -259,19 +259,56 @@ router.post('/savedjobslist', function(req,res) {
 
 //to check whether email exist or not
 router.post('/forgot', function(req,res) {
+  console.log(req.body.email);
   User.find({email: req.body.email}, function(err,found) {
     console.log('fiding email');
     if(found.length) {
-      return res.json({success: true, msg: 'User found'});
+      //console.log(found);
+      resets(found);
+       return res.json({success: true, msg: 'User found'});
+      //return res.json(found);
     }
     else if(err) {
       return res.json({success: false, msg: 'User not found'});
     }
-    else if(!found) {
-      return res.json({success: false, msg: 'User not found'});
+    // else if(!found) {
+    //   return res.json({success: false, msg: 'User not found'});
+    // }
+  });
+});
+// nodemailer
+function resets(foundData) {
+  var mailObj = foundData[0].email;
+  console.log(mailObj);
+  nodemailer.createTestAccount((err,account) => {
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+          user: 'astepfourward@gmail.com', // generated ethereal user
+          pass: 'raj@123456' // generated ethereal password
+      }
+  });
+  let mailOptions = {
+    from: 'astepfourward@gmail.com', // sender address
+    to: mailObj, // list of receivers
+    subject: 'Verify email - Stepfourward', // Subject line
+    text: 'Please click on the above link to verify your email ', // plain text body
+    //html: '<b>Hello world?</b>' // html body
+  };
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
     }
-  })
-})
+    console.log('Message sent: %s', info.messageId);
+    
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+    
+  });
+  });
+ }
 // password reset 
 router.put('/forgotpassword/', function(req,res) {
 
@@ -294,6 +331,19 @@ router.put('/profile/:id', function(req,res) {
     }
   })
 })
+
+// delete a user
+router.delete('/register/:id', function(req,res) {
+  User.findByIdAndRemove({_id: req.params.id},
+    function(err , delMsg) {
+      if(err) {
+        res.send('err in deleting the user ' + err);
+      } else {
+        return res.json({success: true, msg: 'Account deleted'});
+      }
+    }
+  );
+});
 
 
 

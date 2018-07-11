@@ -5,7 +5,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import {AuthService} from '../../services/auth.service';
 import { TermsofusagePage } from '../termsofusage/termsofusage';
 import { PolicyPage } from '../policy/policy';
-
+import { ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -14,15 +14,18 @@ import { PolicyPage } from '../policy/policy';
 })
 export class SettingsPage {
 
-  userSpecificId: any;
+  userSpecificId: any = {_id:'-'};
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private flashMessage:FlashMessagesService,
-    private authService:AuthService) {
+    private authService:AuthService, public toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
+    this.authService.getProfile().subscribe(profile => {
+      this.userSpecificId = profile.user;
+    });
   }
   onLogOutClick() {
     this.authService.logout();
@@ -39,17 +42,24 @@ export class SettingsPage {
 
   //to delete account
   deleteAccount() {
-    this.authService.getProfile().subscribe(profile => {
-      this.userSpecificId = profile.user;
-    });
+    
     this.authService.deleteUser(this.userSpecificId._id).subscribe(data => {
       if(data.success) {
+        this.presentToast();
         this.navCtrl.push(HomePage);
       }
       else{
         alert('something went wrong');
       }
-    })
+    });
+  }
+
+  presentToast() {
+    const toast = this.toastCtrl.create({
+      message: 'Account deleted successfully',
+      duration: 3000
+    });
+    toast.present();
   }
 
 }
