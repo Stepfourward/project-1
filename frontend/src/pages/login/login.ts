@@ -10,7 +10,11 @@ import { ValidateService } from '../../services/validate.service';
 import { ValidationService } from '../../app/validation.service';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
 import { JobsDataProvider } from '../../providers/jobs-data/jobs-data';
-@IonicPage()
+import { ToastController } from 'ionic-angular';
+@IonicPage({
+  name: 'login-page',
+  segment: 'login'
+})
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -26,7 +30,7 @@ export class LoginPage implements OnInit {
   ErrorMsgStatus: boolean = false;
    name1: any = '';
    name2: any = '';
-  
+
   // formgroup: FormGroup;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private validateService: ValidateService,
@@ -35,17 +39,17 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
-    public jobs: JobsDataProvider
+    public jobs: JobsDataProvider, private toastCtrl: ToastController
     ) {
       this.userForm = this.formBuilder.group({
         'username': ['', Validators.required],
         'password': ['', [Validators.required, ValidationService.passwordValidator]]
-        
+
       });
 }
   ngOnInit() {
-   
-  } 
+
+  }
   clearErr(event) {
     this.ErrorMsgStatus = false;
     // private authService:AuthService,
@@ -134,7 +138,7 @@ export class LoginPage implements OnInit {
       {
         name: 'emailid',
         placeholder: 'email ID'
-        
+
       },
     ],
     buttons: [
@@ -147,7 +151,7 @@ export class LoginPage implements OnInit {
       {
         text: 'OK',
         handler: data => {
-          this.emailVerify(data.emailid) 
+          this.emailVerify(data.emailid)
         }
       }
     ]
@@ -163,11 +167,36 @@ export class LoginPage implements OnInit {
         const emailobj = {
           emailid: email
         }
-        this.navCtrl.push(ForgotPasswordPage,emailobj);
+        //this.navCtrl.push(ForgotPasswordPage);
+        let tempMsg = 'please check your email for verification'
+        this.popAlert(tempMsg);
       }
       else {
-        console.log(data.msg);
+        this.presentToast(data.msg);
       }
     })
   }
+
+  presentToast(errMsg) {
+    let toast = this.toastCtrl.create({
+      message: errMsg,
+      duration: 3000,
+      position: 'top'
+    });
+
+    toast.onDidDismiss(() => {
+      //console.log('Dismissed toast');
+    });
+    toast.present();
+  }
+
+  // to show alerts
+  popAlert(tempMsg) {
+    let alert = this.alertCtrl.create({
+     title: 'ALERT',
+     subTitle: tempMsg,
+     buttons: ['Dismiss']
+   });
+   alert.present();
+ }
 }

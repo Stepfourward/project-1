@@ -18,6 +18,7 @@ import { LoginPage } from '../pages/login/login';
 import { LocationPage } from '../pages/location/location';
 import { NotificationPage } from '../pages/notification/notification';
 import { EditinfoPage } from '../pages/editinfo/editinfo';
+import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { SlidesPage } from '../pages/slides/slides';
 import { JobPage } from '../pages/job/job';
 import { ChatBoxPage } from '../pages/chat-box/chat-box';
@@ -33,7 +34,6 @@ import { NgZone } from '@angular/core';
 import { ValidationService } from './validation.service';
 import { ControlMessagesComponent } from './control-messages.component';
 import { HandleUserDataService } from '../services/handleUserData.service';
-import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { PolicyPage } from '../pages/policy/policy';
 import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
 import { JobsDataProvider } from '../providers/jobs-data/jobs-data';
@@ -41,6 +41,10 @@ import { JobActionsProvider } from '../providers/job-actions/job-actions';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Camera } from '@ionic-native/camera';
+//import { RouterModule, ActivatedRoute, Params } from '@angular/router'; 
+//import { ROUTES } from '@angular/router/src/router_config_loader';
+//import { ResetPasswordPage } from '../pages/reset-password/reset-password';
+//declare const routes: Routes = [ { path: 'reset/:token', component: ResetPasswordPage } ];
 
 @NgModule({
   declarations: [
@@ -63,7 +67,8 @@ import { Camera } from '@ionic-native/camera';
     ControlMessagesComponent,
     ForgotPasswordPage,
     PolicyPage,
-    TermsofusagePage
+    TermsofusagePage,
+    
   ],
   imports: [ 
     FormsModule, 
@@ -74,6 +79,11 @@ import { Camera } from '@ionic-native/camera';
     HttpModule,
     SwingModule,
     IonicSwipeAllModule,
+//     RouterModule.forRoot([{
+//       path: '',
+//       component: ResetPasswordPage
+//   },
+// ]) ,
     
     // IonicPageModule.forChild(RegisterPage)
    
@@ -99,7 +109,8 @@ import { Camera } from '@ionic-native/camera';
     ModalPage,
     ForgotPasswordPage,
     PolicyPage,
-    TermsofusagePage 
+    TermsofusagePage ,
+    
   ],
   providers: [
     StatusBar,
@@ -119,4 +130,7 @@ import { Camera } from '@ionic-native/camera';
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class AppModule {}
+
+export class AppModule {
+  
+}

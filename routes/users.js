@@ -13,6 +13,8 @@ const fljobList = require('../models/failedjoblist');
 const savedjobsList = require('../models/savedjobslist');
 const profiles = require('../models/profileData');
 
+var linkAddress = 'http://localhost:8100/#/reset/';
+
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'DELETE, PUT');
@@ -33,7 +35,7 @@ router.post('/register', (req, res, next) => {
         company:req.body.company,
         education:req.body.education
       });
-    
+
       User.addUser(newUser, (err, user) => {
         if(err){
           res.json({success: false, msg:'Failed to register user'});
@@ -88,9 +90,9 @@ console.log(query,updatedUser);
   User.update(query, updatedUser, function(err) {
     if(err) {console.log(err);return;}
     else { console.log('HipHip hurry sucess')}
-    
+
   })
-  
+
 })
 
 
@@ -109,9 +111,11 @@ router.put('/user/:id', function(req, res){
 			   }, function(err, docs){
 			 	if(err) res.json(err);
 				else
-				{ 
-				   console.log(docs);
-				   res.redirect('/user/'+req.params.id);
+				{
+
+           res.json(docs);
+           console.log(docs);
+           //res.send(docs);
 				 }
 			 });
 });
@@ -153,7 +157,7 @@ router.post('/authenticate', (req, res, next) => {
   });
 });
 
-//get job details 
+//get job details
 router.get('/jobdetail', function(req,res) {
   console.log('fetching jobs');
   jobdetail.find(function(err,jobs) {
@@ -257,62 +261,88 @@ router.post('/savedjobslist', function(req,res) {
   });
 });
 
-//to check whether email exist or not
-router.post('/forgot', function(req,res) {
-  console.log(req.body.email);
-  User.find({email: req.body.email}, function(err,found) {
-    console.log('fiding email');
-    if(found.length) {
-      //console.log(found);
-      resets(found);
-       return res.json({success: true, msg: 'User found'});
-      //return res.json(found);
+//to check whether email exist or not for resetPassword functionality
+router.post('/forgot', function(req,res,next) {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err,buf) {
+        var token = buf.toString('hex');
+        done(err,token);
+      });
+    }, function(token,done) {
+      User.findOne({email: req.body.email}, function(err,user) {
+        if(!user) {
+          return res.json({success: false, msg: 'User not found'});
+        }
+        user.resetPasswordToken = token
+        user.resetPasswordExpires = Date.now() + 3600000;
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    }, function(token, user, done) {
+      var smtpTransport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: 'astepfourward@gmail.com',
+          pass: 'raj@123456'
+        }
+      });
+      var mailOptions = {
+        //to: user.email,
+        to: 'astepfourward@gmail.com',
+        from: 'astepfourward@gmail.com',
+        subject: 'for password reset',
+        text: 'please click below link to reset password '+ linkAddress + token
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        console.log('email sent to ' + user.email);
+
+        done(err,'done');
+      });
     }
-    else if(err) {
-      return res.json({success: false, msg: 'User not found'});
-    }
-    // else if(!found) {
-    //   return res.json({success: false, msg: 'User not found'});
-    // }
+  ], function(err) {
+    if (err) return next(err);
+    return res.json({success: true, msg: 'User found'})
   });
 });
-// nodemailer
-function resets(foundData) {
-  var mailObj = foundData[0].email;
-  console.log(mailObj);
-  nodemailer.createTestAccount((err,account) => {
-    let transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false, // true for 465, false for other ports
-      auth: {
-          user: 'astepfourward@gmail.com', // generated ethereal user
-          pass: 'raj@123456' // generated ethereal password
+
+// router.get('http://localhost:8100/api/reset/:token', function(req,res) {
+//   User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now()}},function(err,user) {
+//     console.log(req.param('token'));
+//     if(!user) {
+//       res.send('password token has expired');
+//     }
+//     res.render('reset', {token: req.params.token});
+//     res.json(user);
+//   });
+// });
+
+//to update the new password
+router.put('/reset/:token', function(req, res, next) {
+  console.log('reseting the password');
+  User.findOne({resetPasswordToken:req.params.token}, function(err, user) {
+    if(err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.status(422).json({errors: [{msg: 'invalid reset token'}]});
+    }
+    console.log(user);
+    user.resetPasswordToken ='';
+    user.resetPasswordExpires = '';
+    user.password = req.body.password;
+    User.restPass(user, (err, user) => {
+      if(err){
+        res.json({success: false, msg:'password has not changed'});
+      } else {
+        res.json({success: true, msg:'password has changed'});
       }
+    });
   });
-  let mailOptions = {
-    from: 'astepfourward@gmail.com', // sender address
-    to: mailObj, // list of receivers
-    subject: 'Verify email - Stepfourward', // Subject line
-    text: 'Please click on the above link to verify your email ', // plain text body
-    //html: '<b>Hello world?</b>' // html body
-  };
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-        return console.log(error);
-    }
-    console.log('Message sent: %s', info.messageId);
-    
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-    
-  });
-  });
- }
-// password reset 
-router.put('/forgotpassword/', function(req,res) {
-
 });
+//    ends here.
+
 
 // for profile
 router.put('/profile/:id', function(req,res) {
@@ -348,5 +378,5 @@ router.delete('/register/:id', function(req,res) {
 
 
 
- 
+
 module.exports = router;

@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 // import { tokenNotExpired } from 'angular2-jwt';
+import 'rxjs/add/operator/take';
 
 @Injectable()
 export class AuthService {
   authToken: any;
   user: any;
+  uri: string = 'http://localhost:8100/#/reset';
 
   constructor(private http:Http) { }
 
@@ -62,13 +64,16 @@ export class AuthService {
      return this.http.post('http://localhost:3000/api/forgot',emailId,{headers: headers})
     .map(res => res.json());
   }
+// password reset functionality
 
-  resetPassword(passwordData) {
-    let headers = new Headers();
-    headers.append('Content-Type','application/json');
-    return this.http.put('http://localhost:3000/api/forgotpassword/'+passwordData.emailId,passwordData,{headers: headers})
-    .map(res => res.json());
-  }
+
+  // getPassword(tokenData) {
+  //   let headers = new Headers();
+  //   //console.log(passwordData);
+  //   headers.append('Content-Type','application/json');
+  //   return this.http.get('http://localhost:8100/api/reset/' + tokenData,{headers: headers})
+  //   .map(res => res.json());
+  // }
 
 
   loggedIn(){
@@ -98,5 +103,15 @@ export class AuthService {
     .map(res => res.json());
 
   }
+
+  resetPassword(passwordData) {
+    let headers = new Headers();
+    console.log(passwordData);
+    headers.append('Content-Type','application/json');
+    return this.http.put('http://localhost:3000/users/reset/'+passwordData.token,passwordData,{headers:headers})
+    .map(res => res.json());
+  }
+
+
 
 }

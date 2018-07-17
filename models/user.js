@@ -63,7 +63,7 @@ const UserSchema = mongoose.Schema({
   module.exports.getUserById = function(id, callback){
     User.findById(id, callback);
   }
-  
+
   module.exports.getUserByUsername = function(username, callback){
     const query = {username: username}
     User.findOne(query, callback);
@@ -85,3 +85,13 @@ const UserSchema = mongoose.Schema({
       callback(null, isMatch);
     });
   }
+
+  module.exports.restPass = function(user, callback){
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        if(err) throw err;
+        user.password = hash;
+        user.save(callback);
+      });
+    });
+  };
