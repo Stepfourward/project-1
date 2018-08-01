@@ -21,15 +21,10 @@ export class AppliedPage {
     //this.appliedjobs = null;
     console.log('ionViewDidLoad AppliedPage');
     //geting jobs list from jobs action provider
-    this.getjobs.getAppliedjobList().then((data) => {
-      console.log('displaying list ' + data);
-      for (let values of data) {
-        this.char = values.companyTitle.charAt(0);
-        this.appliedjobs.push(values);
-        console.log(this.appliedjobs);
-        
-      }
-    });
+    this.getjobs.getAppliedjobList().subscribe(data => {
+      this.appliedjobs = data;
+      console.log(this.appliedjobs);
+    })
   }
 
 }

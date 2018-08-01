@@ -10,7 +10,8 @@ var session = require('express-session')
 var nodemailer = require('nodemailer');
 var async = require('async');
 var crypto = require('crypto');
-var LocalStrategy = require('passport-local').Strategy;
+//var LocalStrategy = require('passport-local').Strategy;
+//var LocalStrategy = require('./config/min').Strategy;
 var cookieParser = require('cookie-parser');
 const User = require('./models/user');
 // Connect To Database
@@ -32,7 +33,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(methodOverride());
-app.use(methodOverride('X-HTTP-Method-Override'))
+app.use(methodOverride('X-HTTP-Method-Override'));
+//app.use(express.session({ secret: 'keyboard dog' }));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");

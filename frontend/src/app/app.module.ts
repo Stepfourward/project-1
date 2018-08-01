@@ -30,7 +30,7 @@ import { ModalPage } from '../pages/modal/modal';
 import { ValidateService } from '../services/validate.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {AuthService} from '../services/auth.service';
-import { NgZone } from '@angular/core';
+//import { NgZone } from '@angular/core';
 import { ValidationService } from './validation.service';
 import { ControlMessagesComponent } from './control-messages.component';
 import { HandleUserDataService } from '../services/handleUserData.service';
@@ -41,10 +41,7 @@ import { JobActionsProvider } from '../providers/job-actions/job-actions';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Camera } from '@ionic-native/camera';
-//import { RouterModule, ActivatedRoute, Params } from '@angular/router'; 
-//import { ROUTES } from '@angular/router/src/router_config_loader';
-//import { ResetPasswordPage } from '../pages/reset-password/reset-password';
-//declare const routes: Routes = [ { path: 'reset/:token', component: ResetPasswordPage } ];
+import { LinkedIn, LinkedInLoginScopes } from '@ionic-native/linkedin';
 
 @NgModule({
   declarations: [
@@ -79,13 +76,7 @@ import { Camera } from '@ionic-native/camera';
     HttpModule,
     SwingModule,
     IonicSwipeAllModule,
-//     RouterModule.forRoot([{
-//       path: '',
-//       component: ResetPasswordPage
-//   },
-// ]) ,
-    
-    // IonicPageModule.forChild(RegisterPage)
+
    
     
 
@@ -125,7 +116,7 @@ import { Camera } from '@ionic-native/camera';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     JobsDataProvider,
     JobActionsProvider,
-    File,FileChooser,Camera
+    File,FileChooser,Camera,LinkedIn
     
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

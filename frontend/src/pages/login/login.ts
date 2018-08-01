@@ -164,9 +164,9 @@ export class LoginPage implements OnInit {
     this.authService.forgotpasswordMail(email).subscribe((data) => {
       if(data.success) {
         console.log(data.msg);
-        const emailobj = {
-          emailid: email
-        }
+        // const emailobj = {
+        //   emailid: email
+        // }
         //this.navCtrl.push(ForgotPasswordPage);
         let tempMsg = 'please check your email for verification'
         this.popAlert(tempMsg);

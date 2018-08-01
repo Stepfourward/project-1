@@ -23,6 +23,7 @@ export class ResetPasswordPage {
   emailId: string;
   token: any;
   passwordForm: any;
+  userForm: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public authservices: AuthService, public jobspage: JobsDataProvider,
               private alertCtrl: AlertController, public toastCtrl: ToastController,private formBuilder: FormBuilder,

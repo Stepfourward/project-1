@@ -164,7 +164,7 @@ export class FeedsPage {
     let removedCard = this.cards.pop();
     if (like) {
       console.log('you have liked '+ removedCard.jobtitle + ' '+ removedCard.company + ' '+ removedCard.location);
-      this.joblist.addJobList(removedCard);
+      this.joblist.addJobList(removedCard).subscribe(data => console.log(data));
     } else {
       console.log('you have disliked '+ removedCard.jobtitle+ ' '+ removedCard.companyName + ' '+ removedCard.location);
       this.joblist.addfailedJobList(removedCard);

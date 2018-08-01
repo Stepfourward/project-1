@@ -374,7 +374,19 @@ router.delete('/register/:id', function(req,res) {
     }
   );
 });
-
+// linkedin
+// router.get('/auth/linkedin',
+// passport.authenticate('linkedin', { state: 'SOME STATE' }),
+// function(req, res){
+//   // The request will be redirected to Linkedin for authentication, so this
+//   // function will not be called.
+// });
+// // GET /auth/linkedin/callback
+// router.get('/auth/linkedin/callback',
+// passport.authenticate('linkedin', { failureRedirect: '/login' }),
+// function(req, res) {
+//   res.redirect('/');
+// });
 
 
 

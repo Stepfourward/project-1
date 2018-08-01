@@ -26,28 +26,19 @@ export class JobActionsProvider {
       location : jobitem.location
     }
     console.log(selected);
-    this.http.post('http://localhost:3000/api/appliedjobs', selected,{headers: headers})
-    .map(res => res.json())
-    .subscribe(data => {
-      this.jobslist = data;
-    });
+    return this.http.post('http://localhost:3000/api/appliedjobs', selected,{headers: headers})
+    .map(res => res.json());
+    // .subscribe(data => {
+    //   this.jobslist = data;
+    // });
   }
 
   //getting applied jobs form back-end
   getAppliedjobList() {
-    if (this.jobslist) {
-      return Promise.resolve(this.jobslist);
-    }
-    return new Promise( resolve => {
-      let headers = new Headers();
-      headers.append('Content-Type','application/json');
-      this.http.get('http://localhost:3000/api/appliedjobs',{headers: headers})
-      .map(res => res.json())
-      .subscribe(data => {
-        this.jobslist = data;
-        resolve(this.jobslist);
-      });
-    });
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/api/appliedjobs',{headers: headers})
+    .map(res => res.json());
   } 
 
   //getting failed job
