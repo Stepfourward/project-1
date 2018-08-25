@@ -45,6 +45,7 @@ page-chat-box {
         float: left;
         background-color: #F1F0F0;
         color: black;
+        clear: both;
     }
 
     .innermsg.right {
@@ -52,6 +53,7 @@ page-chat-box {
         //margin-right: 10%;
         background-color: #0084FF;
         color: white;
+        clear: both;
     }
 
     .msgbubble {

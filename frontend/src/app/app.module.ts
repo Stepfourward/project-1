@@ -42,6 +42,8 @@ import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Camera } from '@ionic-native/camera';
 import { LinkedIn, LinkedInLoginScopes } from '@ionic-native/linkedin';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Deeplinks } from '@ionic-native/deeplinks';
 
 @NgModule({
   declarations: [
@@ -116,7 +118,7 @@ import { LinkedIn, LinkedInLoginScopes } from '@ionic-native/linkedin';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     JobsDataProvider,
     JobActionsProvider,
-    File,FileChooser,Camera,LinkedIn
+    File,FileChooser,Camera,LinkedIn,InAppBrowser,Deeplinks
     
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
