@@ -15,7 +15,7 @@ export class LinkedinPageProvider {
     let headers = new HttpHeaders();
     //headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization','Bearer '+token);
-    return this.http.get('https://api.linkedin.com/v1/people/~?format=json&oauth2_access_token='+token,{headers: headers})
+    return this.http.get('https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url)?format=json&oauth2_access_token='+token,{headers: headers})
     
 
   }
