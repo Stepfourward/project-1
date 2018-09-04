@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { HttpModule } from '@angular/http';
+import { HttpClient,HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { IonTextAvatar } from 'ionic-text-avatar';
 import { SwingModule } from 'angular2-swing';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
@@ -44,6 +45,7 @@ import { Camera } from '@ionic-native/camera';
 import { LinkedIn, LinkedInLoginScopes } from '@ionic-native/linkedin';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Deeplinks } from '@ionic-native/deeplinks';
+import { LinkedinPageProvider } from '../providers/linkedin-page/linkedin-page';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import { Deeplinks } from '@ionic-native/deeplinks';
     HttpModule,
     SwingModule,
     IonicSwipeAllModule,
+    HttpClientModule,
+    
 
    
     
@@ -118,7 +122,8 @@ import { Deeplinks } from '@ionic-native/deeplinks';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     JobsDataProvider,
     JobActionsProvider,
-    File,FileChooser,Camera,LinkedIn,InAppBrowser,Deeplinks
+    File,FileChooser,Camera,LinkedIn,InAppBrowser,Deeplinks,
+    LinkedinPageProvider
     
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
