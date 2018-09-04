@@ -26,9 +26,7 @@ declare var window: any;
 })
 export class HomePage {
   
-  scopes: LinkedInLoginScopes[] = ['r_basicprofile', 'r_emailaddress', 'rw_company_admin', 'w_share'];
-  isLoggedIn: boolean = false;
-  selfData = { id:"", firstName:"", lastName:"", emailAddress:"" };
+  
   clientId = '81owhlvqu6ukaj';
   clientSecret = '84AtzJD1H7YKiVIl';
   redirect_uri = "http://localhost";
@@ -54,12 +52,13 @@ export class HomePage {
     
   }
   
+  // redirect to the login page
   gotoSignpage() {
 
     this.navCtrl.push(LoginPage);
 
   }
-
+  // redirect to register page
   openRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }
@@ -67,11 +66,13 @@ export class HomePage {
   toPolicypage() {
     this.navCtrl.push(PolicyPage);
   }
+
+  // to redirect to the terms of usage page
   totermPage() {
     this.navCtrl.push(TermsofusagePage);
   }
   
-  
+  // to redirect to the linkedin OAuth login page
   linkPage(): Promise<any> {
     return new Promise((resolve,reject) => {
       let browser = this.iab.create(this.linkedinURL,'_blank');
@@ -94,6 +95,7 @@ export class HomePage {
     });
   }
    
+  // on clicking the sign-in with linkedin button
   linkedinLogin() {
     let loader;
     this.platform.ready().then(()=> {
@@ -111,9 +113,9 @@ export class HomePage {
             console.log('received the token');
             this.lkPage.gettheLinkedinUserDetails(result)
             .subscribe((profileData: any) => {
-              alert(profileData + 'profile');
+              alert(JSON.stringify(profileData));
             },(err) => {
-              alert(JSON.stringify(err) + 'error');
+              alert('Error in getting the response ' +JSON.stringify(err));
             })
           }
           else {
@@ -124,8 +126,4 @@ export class HomePage {
     });
   }
 
-  
-
-
-  
 }

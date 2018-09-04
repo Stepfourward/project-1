@@ -9,12 +9,13 @@ export class LinkedinPageProvider {
     console.log('Hello LinkedinPageProvider Provider');
   }
 
+  // to get the api response(profile data) from linkedin
   gettheLinkedinUserDetails(token: any): Observable<any> {
     alert(token);
     let headers = new HttpHeaders();
     //headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Authorization','Bearer '+token);
-    return this.http.get('https://api.linkedin.com/v1/people/~?oauth2_access_token='+token,{headers: headers})
+    return this.http.get('https://api.linkedin.com/v1/people/~?format=json&oauth2_access_token='+token,{headers: headers})
     
 
   }
