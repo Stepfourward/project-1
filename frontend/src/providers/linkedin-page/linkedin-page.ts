@@ -17,7 +17,14 @@ export class LinkedinPageProvider {
     headers.append('Authorization','Bearer '+token);
     return this.http.get('https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,picture-url)?format=json&oauth2_access_token='+token,{headers: headers})
     
+  }
 
+  // sending linkedin profile data to database
+  postLinkedinData(profileData) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://192.168.0.100:3000/api/linkedinuser',profileData,{headers: headers})
+    
   }
 
 }

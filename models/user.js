@@ -7,6 +7,9 @@ const UserSchema = mongoose.Schema({
   name: {
     type: String
   },
+  linkedin_id: {
+    type: String
+  },
   email: {
     type: String,
     required: true,
@@ -18,8 +21,8 @@ const UserSchema = mongoose.Schema({
     unique: true
   },
   password: {
-    type: String,
-    required: true
+    type: String
+    
   },
   phone: {
     type: String
@@ -54,6 +57,9 @@ const UserSchema = mongoose.Schema({
     type: String
   },
   expirence: {
+    type: String
+  },
+  lkprofilePic: {
     type: String
   }
 });

@@ -374,19 +374,25 @@ router.delete('/register/:id', function(req,res) {
     }
   );
 });
-// linkedin
-// router.get('/auth/linkedin',
-// passport.authenticate('linkedin', { state: 'SOME STATE' }),
-// function(req, res){
-//   // The request will be redirected to Linkedin for authentication, so this
-//   // function will not be called.
-// });
-// // GET /auth/linkedin/callback
-// router.get('/auth/linkedin/callback',
-// passport.authenticate('linkedin', { failureRedirect: '/login' }),
-// function(req, res) {
-//   res.redirect('/');
-// });
+
+// registering the linkedin user
+router.post('/linkedinuser', function(req,res) {
+  console.log('started')
+  User.create({
+    linkedin_id: req.body.id,
+    name: req.body.first-name,
+    username: req.body.first-name +' ' +req.body.last-name,
+    email: req.body.email-address,
+    lkprofilePic: req.body.picture-url
+  }, function(err,result) {
+    if(err) {
+       res.json({success: false, msg: 'failed to add'})
+    }
+    else {
+       res.json({success: true,msg: 'account added'})
+    }
+  });
+});
 
 
 

@@ -112,8 +112,20 @@ export class HomePage {
           if(result !== undefined) {
             console.log('received the token');
             this.lkPage.gettheLinkedinUserDetails(result)
-            .subscribe((profileData: any) => {
-              alert(JSON.stringify(profileData));
+            .subscribe((res: any) => {
+              let profileData = res;
+              alert(profileData.id);
+              this.lkPage.postLinkedinData(profileData)
+              .subscribe(data => {
+                if (data) {
+                  alert('Data added sucessfully')
+                }
+                else if(!data) {
+                  alert('data is not added')
+                }
+              }, (err) => {
+                console.log('err in subscribe '+err);
+              });
             },(err) => {
               alert('Error in getting the response ' +JSON.stringify(err));
             })
