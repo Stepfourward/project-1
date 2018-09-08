@@ -31,14 +31,14 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/users/profile',{headers: headers})
+    return this.http.get('http://192.168.0.100:3000/users/profile',{headers: headers})
       .map(res => res.json());
   }
   updateUserData(user) {
     let headers = new Headers();
     console.log(headers,user);
     headers.append('Content-Type','application/json');
-    return this.http.put('http://localhost:3000/api/user/' + user._id, user,{headers: headers})
+    return this.http.put('http://192.168.0.100:3000/api/user/' + user._id, user,{headers: headers})
       .map(res => res.json());
   }
 

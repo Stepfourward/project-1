@@ -377,21 +377,51 @@ router.delete('/register/:id', function(req,res) {
 
 // registering the linkedin user
 router.post('/linkedinuser', function(req,res) {
-  console.log('started')
-  User.create({
-    linkedin_id: req.body.id,
-    name: req.body.first-name,
-    username: req.body.first-name +' ' +req.body.last-name,
-    email: req.body.email-address,
-    lkprofilePic: req.body.picture-url
-  }, function(err,result) {
+  console.log('linkedin request')
+  User.findOne({linkedin_id: req.body.linkedin_id}, function(err,currentUser) {
     if(err) {
-       res.json({success: false, msg: 'failed to add'})
+      console.log('err in finding linkedin user '+ err);
     }
-    else {
-       res.json({success: true,msg: 'account added'})
+    else if(currentUser) {
+      console.log('user already exits');
+      const token = jwt.sign(currentUser, config.secret, { expiresIn: 604800 });
+      res.json({success: true, token: 'JWT '+token, user: {
+        id: currentUser._id,
+        linkedin_id: currentUser.linkedin_id,
+        name: currentUser.name,
+        username: currentUser.username,
+        email: currentUser.email,
+        lkprofilePic: currentUser.profilePic
+      }, msg: 'user exits'
+    });
+    }
+    else if(!currentUser) {
+      User.create({
+        linkedin_id: req.body.linkedin_id,
+        name: req.body.name,
+        username: req.body.username,
+        email: req.body.email,
+        lkprofilePic: req.body.lkprofilePic
+      }, function(err,result) {
+        if(err) {
+           res.json({success: false, msg: 'failed to add'})
+           console.log(err);
+        }
+        else {
+          const token = jwt.sign(currentUser, config.secret, { expiresIn: 604800 });
+          res.json({success: true, token: 'JWT '+token, user: {
+            id: result._id,
+            linkedin_id: result.linkedin_id,
+            name: result.name,
+            username: result.username,
+            email: result.email,
+            lkprofilePic: result.profilePic
+          }, msg: 'User added '  }); 
+        }
+      });
     }
   });
+  
 });
 
 

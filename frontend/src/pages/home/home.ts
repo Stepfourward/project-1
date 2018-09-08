@@ -5,7 +5,7 @@ import { LoginPage } from '../login/login';
 import { LocationPage} from '../location/location';
 import { PolicyPage } from '../policy/policy';
 import { TermsofusagePage } from '../termsofusage/termsofusage';
-import { LinkedIn, LinkedInLoginScopes } from '@ionic-native/linkedin';
+//import { LinkedIn, LinkedInLoginScopes } from '@ionic-native/linkedin';
 import { AuthService } from '../../services/auth.service';
 import { AlertController } from 'ionic-angular';
 import {Http, Headers} from '@angular/http';
@@ -16,6 +16,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { LinkedinPageProvider } from '../../providers/linkedin-page/linkedin-page';
+import { EditinfoPage } from '../editinfo/editinfo';
 
 declare var window: any;
 
@@ -38,7 +39,7 @@ export class HomePage {
   result: any;
   code: any;
 
-  constructor(public navCtrl: NavController, private  linkedin: LinkedIn, private authservices: AuthService,
+  constructor(public navCtrl: NavController,  private authservices: AuthService,
   private alertCtrl: AlertController, private http: HttpClient, private platform: Platform,
   private iab: InAppBrowser, public lkPage: LinkedinPageProvider) {
 
@@ -107,21 +108,28 @@ export class HomePage {
         //.toPromise()
         .subscribe((res: any) => {
           let result = res.access_token;
-          console.log(result);
           //alert(result);
           if(result !== undefined) {
             console.log('received the token');
             this.lkPage.gettheLinkedinUserDetails(result)
             .subscribe((res: any) => {
-              let profileData = res;
-              alert(profileData.id);
+              let profileData = {
+                name: res.firstName,
+                username: res.firstName + ' '+res.lastName,
+                linkedin_id: res.id,
+                email: res.emailAddress,
+                lkprofilePic: res.pictureUrl
+              }
+              alert(profileData.email);
               this.lkPage.postLinkedinData(profileData)
-              .subscribe(data => {
-                if (data) {
-                  alert('Data added sucessfully')
+              .subscribe((data: any) => {
+                if (data.success) {
+                  alert('Data added sucessfully ' && data.msg);
+                  this.authservices.storeUserData(data.token,data.user);
+                  this.navCtrl.push(EditinfoPage);
                 }
-                else if(!data) {
-                  alert('data is not added')
+                else {
+                  alert('data is not added');
                 }
               }, (err) => {
                 console.log('err in subscribe '+err);
