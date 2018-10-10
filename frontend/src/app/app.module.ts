@@ -47,6 +47,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { LinkedinPageProvider } from '../providers/linkedin-page/linkedin-page';
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -123,7 +124,7 @@ import { LinkedinPageProvider } from '../providers/linkedin-page/linkedin-page';
     JobsDataProvider,
     JobActionsProvider,
     File,FileChooser,Camera,InAppBrowser,Deeplinks,
-    LinkedinPageProvider
+    LinkedinPageProvider,
     
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

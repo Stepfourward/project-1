@@ -12,6 +12,7 @@ const jobList = require('../models/jobList');
 const fljobList = require('../models/failedjoblist');
 const savedjobsList = require('../models/savedjobslist');
 const profiles = require('../models/profileData');
+const dialogflow = require('dialogflow');
 
 var linkAddress = 'http://localhost:8100/#/reset/';
 
@@ -423,6 +424,97 @@ router.post('/linkedinuser', function(req,res) {
   });
   
 });
+
+//    dialoflow code
+router.post('/dialogflow', function(req,res) {
+  console.log('reached here');
+  const projectId = "stepfourward-7e702";
+  const LANGUAGE_CODE = 'en-US';
+  const sessionId = req.body.sessionId;
+  var query = req.body.query;
+
+  const sessionClient = new dialogflow.SessionsClient();
+  const sessionPath = sessionClient.sessionPath(projectId,sessionId);
+  const request = {
+    session: sessionPath,
+    queryInput: {
+      text: {
+        text: query,
+        languageCode: LANGUAGE_CODE,
+      },
+    },
+  };
+
+  sessionClient.detectIntent(request).then(response => {
+    console.log('intent detected');
+    const result = response[0].queryResult;
+    console.log(`  Query: ${result.queryText}`);
+    console.log(`  Response: ${result.fulfillmentText}`);
+
+    if(result.fulfillmentText) {
+      console.log(result.fulfillmentText);
+      return res.json({reply: result.fulfillmentText})
+    }
+    // if(result.intent) {
+    //   console.log(`  Intent: ${result.intent.displayName}`)
+    // }
+    else {
+      console.log('no intent found');
+    }
+  }).catch(err => {
+    console.log('error '+err);
+  })
+  
+})
+
+// facebook request ------------------------------------
+router.post('/facebookuser', function(req,res) {
+  console.log('facebook request');
+  User.findOne({linkedin_id: req.body.id}, function(err,currentUser) {
+    if(err) {
+      console.log('err in finding facebook user '+ err);
+    }
+    else if(currentUser) {
+      console.log('user already exits');
+      const token = jwt.sign(currentUser, config.secret, { expiresIn: 604800 });
+      res.json({success: true, token: 'JWT '+token, user: {
+        id: currentUser._id,
+        linkedin_id: currentUser.linkedin_id,
+        name: currentUser.name,
+        username: currentUser.username,
+        email: currentUser.email,
+        lkprofilePic: currentUser.profilePic
+      }, msg: 'user exits'
+    });
+    }
+    else if(!currentUser) {
+      User.create({
+        linkedin_id: req.body.id,
+        name: req.body.first_name,
+        username: req.body.username,
+        email: req.body.email,
+        lkprofilePic: req.body.picture
+      }, function(err,result) {
+        if(err) {
+           res.json({success: false, msg: 'failed to add'})
+           console.log(err);
+        }
+        else {
+          const token = jwt.sign(currentUser, config.secret, { expiresIn: 604800 });
+          res.json({success: true, token: 'JWT '+token, user: {
+            id: result._id,
+            linkedin_id: result.linkedin_id,
+            name: result.name,
+            username: result.username,
+            email: result.email,
+            lkprofilePic: result.profilePic
+          }, msg: 'User added '  }); 
+        }
+      });
+    }
+  });
+});
+
 
 
 

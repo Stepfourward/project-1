@@ -12,6 +12,7 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "cors": "*",
+    "dialogflow": "^0.6.0",
     "express": "*",
     "express-session": "^1.15.6",
     "jsonwebtoken": "*",

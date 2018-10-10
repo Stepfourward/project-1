@@ -17,6 +17,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { LinkedinPageProvider } from '../../providers/linkedin-page/linkedin-page';
 import { EditinfoPage } from '../editinfo/editinfo';
+//import { Facebook,FacebookLoginResponse } from '@ionic-native/facebook';
 
 declare var window: any;
 
@@ -73,7 +74,7 @@ export class HomePage {
     this.navCtrl.push(TermsofusagePage);
   }
   
-  // to redirect to the linkedin OAuth login page
+  // to redirect to the linkedin OAuth login page -------------------------------------
   linkPage(): Promise<any> {
     return new Promise((resolve,reject) => {
       let browser = this.iab.create(this.linkedinURL,'_blank');
@@ -145,5 +146,37 @@ export class HomePage {
       });
     });
   }
+
+  // facebook login ----------------------------------------------------------
+  // facebookLogin() {
+  //   this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
+  //     this.facebook.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', [])
+  //     .then((profile: any) => {
+  //       let userData = {
+  //         email: profile['email'],
+  //         first_name: profile['first_name'],
+  //         picture: profile['picture_large']['data']['url'],
+  //         username: profile['name'],
+  //         id: profile['id']
+  //       }
+  //       alert(userData.first_name);
+  //       console.log(userData);
+  //       this.lkPage.postFacebookData(userData)
+  //       .subscribe((data: any) => {
+  //         if (data.success) {
+  //           alert('Data added sucessfully ' && data.msg);
+  //           this.authservices.storeUserData(data.token,data.user);
+  //           this.navCtrl.push(EditinfoPage);
+  //         }
+  //         else {
+  //           alert('data is not added');
+  //         }
+  //       },(err) => {
+  //         alert('error in subscribing ' + err);
+  //         console.log('error in subscribing ' + err);
+  //       })
+  //     });
+  //   });
+  // }
 
 }

@@ -23,8 +23,17 @@ export class LinkedinPageProvider {
   postLinkedinData(profileData) {
     let headers = new HttpHeaders();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://192.168.0.100:3000/api/linkedinuser',profileData,{headers: headers})
+    return this.http.post('http://192.168.0.103:3000/api/linkedinuser',profileData,{headers: headers})
     
+  }
+
+  // facebook details to db -------------------------
+  postFacebookData(userData) {
+    //alert(userData);
+    let headers = new HttpHeaders();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://192.168.0.103:3000/api/facebookuser',userData,{headers: headers})
+  
   }
 
 }
