@@ -44,8 +44,9 @@ import { FileChooser } from '@ionic-native/file-chooser';
 import { Camera } from '@ionic-native/camera';
 //import { LinkedIn, LinkedInLoginScopes } from '@ionic-native/linkedin';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Deeplinks } from '@ionic-native/deeplinks';
+//import { Deeplinks } from '@ionic-native/deeplinks';
 import { LinkedinPageProvider } from '../providers/linkedin-page/linkedin-page';
+import { Facebook } from '@ionic-native/facebook';
 
 @NgModule({
   declarations: [
@@ -122,8 +123,8 @@ import { LinkedinPageProvider } from '../providers/linkedin-page/linkedin-page';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     JobsDataProvider,
     JobActionsProvider,
-    File,FileChooser,Camera,InAppBrowser,Deeplinks,
-    LinkedinPageProvider
+    File,FileChooser,Camera,InAppBrowser,
+    LinkedinPageProvider,Facebook
     
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

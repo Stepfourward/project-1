@@ -27,4 +27,13 @@ export class LinkedinPageProvider {
     
   }
 
+  //posting facebook data ---------------------------------------
+  postFacebookData(fbData) {
+    alert(fbData.email);
+    //let headers = new HttpHeaders();
+    //headers.append('Content-Type','application/json');
+    return this.http.post('http://192.168.0.100:3000/api/facebookuser',fbData)
+  
+  }
+
 }

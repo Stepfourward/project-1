@@ -19,12 +19,12 @@
 <ion-content>
   <div style="font-size:10px; text-align:center;">7 minutes ago</div>
   <ion-list no-lines class="msgbubble" *ngFor="let msg of messages">
-    <div class="innermsg left" text-left *ngIf="userId != msg.id">
+    <!-- <div class="innermsg left" text-left *ngIf="userId != msg.id">
       {{ msg.reply }}
     </div>
     <div class="innermsg right" text-right *ngIf="userId == msg.id">
         {{ msg.reply }}
-    </div>
+    </div> -->
   </ion-list>
 </ion-content>
 

@@ -112,7 +112,12 @@ export class AuthService {
     .map(res => res.json());
   }
 
-  
+  dialogflow() {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:3000/api/dialogflow',{headers: headers})
+    .map(res => res.json());
+  }
   
 
 

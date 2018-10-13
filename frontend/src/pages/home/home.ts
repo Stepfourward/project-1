@@ -17,6 +17,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { LinkedinPageProvider } from '../../providers/linkedin-page/linkedin-page';
 import { EditinfoPage } from '../editinfo/editinfo';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 declare var window: any;
 
@@ -41,7 +42,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,  private authservices: AuthService,
   private alertCtrl: AlertController, private http: HttpClient, private platform: Platform,
-  private iab: InAppBrowser, public lkPage: LinkedinPageProvider) {
+  private iab: InAppBrowser, public lkPage: LinkedinPageProvider,private facebook: Facebook) {
 
     //this.platform = platform;
     //this.http = http;
@@ -140,6 +141,34 @@ export class HomePage {
           }
           else {
             alert('did not received any token');
+          }
+        });
+      });
+    });
+  }
+
+  //facebook login ----------------------------------------------------------------
+
+  loginWithFB() {
+    this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse) => {
+      this.facebook.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', [])
+      .then((profile: any) => {
+        let fbData = {
+          email: profile.email,
+          first_name: profile.first_name,
+          id: profile.id,
+          username: profile.name
+        }
+        alert(JSON.stringify(profile));
+        this.lkPage.postFacebookData(fbData)
+        .subscribe((data: any) => {
+          if (data.success) {
+            alert('Data added sucessfully ' && data.msg);
+            this.authservices.storeUserData(data.token,data.user);
+            this.navCtrl.push(EditinfoPage);
+          }
+          else {
+            alert('data is not added');
           }
         });
       });
