@@ -137,7 +137,7 @@ router.post('/authenticate', (req, res, next) => {
     User.comparePassword(password, user.password, (err, isMatch) => {
       if(err) throw err;
       if(isMatch){
-        const token = jwt.sign(user, config.secret, {
+        const token = jwt.sign(user.toJSON(), config.secret, {
           expiresIn: 604800 // 1 week
         });
 
@@ -378,38 +378,42 @@ router.delete('/register/:id', function(req,res) {
 
 // registering the linkedin user
 router.post('/linkedinuser', function(req,res) {
-  console.log('linkedin request')
-  User.findOne({linkedin_id: req.body.linkedin_id}, function(err,currentUser) {
+  console.log('Receiving linkedin data');
+  //const linkedin_id = req.body.linkedin_id;
+  User.findOne({linkedin_id: req.body.linkedin_id}, function(err, linkedinUser) {
     if(err) {
-      console.log('err in finding linkedin user '+ err);
+      console.log('err in finding linkedin user '+err);
     }
-    else if(currentUser) {
-      console.log('user already exits');
-      const token = jwt.sign(currentUser, config.secret, { expiresIn: 604800 });
+    // if user exits
+    else if(linkedinUser) {
+      console.log('user exist');
+      const token = jwt.sign(linkedinUser.toJSON(), config.secret, {expiresIn: 604800});
       res.json({success: true, token: 'JWT '+token, user: {
-        id: currentUser._id,
-        linkedin_id: currentUser.linkedin_id,
-        name: currentUser.name,
-        username: currentUser.username,
-        email: currentUser.email,
-        lkprofilePic: currentUser.profilePic
-      }, msg: 'user exits'
-    });
+          id: linkedinUser._id,
+          linkedin_id: linkedinUser.linkedin_id,
+          name: linkedinUser.name,
+          username: linkedinUser.username,
+          email: linkedinUser.email,
+          lkprofilePic: linkedinUser.profilePic
+        }, msg: 'user exits'
+      });
     }
-    else if(!currentUser) {
+    // if user doesn't exist
+    else {
       User.create({
         linkedin_id: req.body.linkedin_id,
         name: req.body.name,
         username: req.body.username,
         email: req.body.email,
         lkprofilePic: req.body.lkprofilePic
-      }, function(err,result) {
+      }, function(err, result) {
         if(err) {
-           res.json({success: false, msg: 'failed to add'})
-           console.log(err);
+          res.json({success: false, msg: 'failed to add'})
+          console.log('error in adding the data '+err);
         }
-        else {
-          const token = jwt.sign(currentUser, config.secret, { expiresIn: 604800 });
+        else if(result) {
+          console.log(typeof(result));
+          const token = jwt.sign(result.toJSON(),config.secret,{ expiresIn: 604800 });
           res.json({success: true, token: 'JWT '+token, user: {
             id: result._id,
             linkedin_id: result.linkedin_id,
@@ -417,12 +421,12 @@ router.post('/linkedinuser', function(req,res) {
             username: result.username,
             email: result.email,
             lkprofilePic: result.profilePic
-          }, msg: 'User added '  }); 
+          }, msg: 'User added '  });
         }
       });
     }
   });
-  
+
 });
 
 //    dialoflow code
