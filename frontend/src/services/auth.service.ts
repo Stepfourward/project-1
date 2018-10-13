@@ -16,14 +16,14 @@ export class AuthService {
     let headers = new Headers();
     console.log(headers,user);
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/register', user,{headers: headers})
+    return this.http.post('http://192.168.0.105:3000/users/register', user,{headers: headers})
       .map(res => res.json());
   }
 
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:3000/users/authenticate', user,{headers: headers})
+    return this.http.post('http://192.168.0.105:3000/users/authenticate', user,{headers: headers})
       .map(res => res.json());
   }
   getProfile() {
@@ -31,14 +31,14 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    return this.http.get('http://192.168.0.100:3000/users/profile',{headers: headers})
+    return this.http.get('http://192.168.0.105:3000/users/profile',{headers: headers})
       .map(res => res.json());
   }
   updateUserData(user) {
     let headers = new Headers();
     console.log(headers,user);
     headers.append('Content-Type','application/json');
-    return this.http.put('http://192.168.0.100:3000/api/user/' + user._id, user,{headers: headers})
+    return this.http.put('http://192.168.0.105:3000/api/user/' + user._id, user,{headers: headers})
       .map(res => res.json());
   }
 
@@ -61,7 +61,7 @@ export class AuthService {
     }
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-     return this.http.post('http://localhost:3000/api/forgot',emailId,{headers: headers})
+     return this.http.post('http://192.168.0.105:3000/api/forgot',emailId,{headers: headers})
     .map(res => res.json());
   }
 // password reset functionality
@@ -91,7 +91,7 @@ export class AuthService {
     let headers = new Headers();
     //console.log(headers,user);
     headers.append('Content-Type','application/json');
-    return this.http.put('http://localhost:3000/api/profile/' + userProfiledata._id, userProfiledata,{headers: headers})
+    return this.http.put('http://192.168.0.105:3000/api/profile/' + userProfiledata._id, userProfiledata,{headers: headers})
       .map(res => res.json());
   }
 
@@ -99,7 +99,7 @@ export class AuthService {
   deleteUser(userId) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.delete('http://localhost:3000/users/register/' + userId,{headers: headers})
+    return this.http.delete('http://192.168.0.105:3000/users/register/' + userId,{headers: headers})
     .map(res => res.json());
 
   }
@@ -108,14 +108,21 @@ export class AuthService {
     let headers = new Headers();
     console.log(passwordData);
     headers.append('Content-Type','application/json');
-    return this.http.put('http://localhost:3000/users/reset/'+passwordData.token,passwordData,{headers:headers})
+    return this.http.put('http://192.168.0.105:3000/users/reset/'+passwordData.token,passwordData,{headers:headers})
     .map(res => res.json());
   }
 
+<<<<<<< HEAD
   dialogflow() {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.get('http://localhost:3000/api/dialogflow',{headers: headers})
+=======
+  dialogflow(queryData) {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://192.168.0.105:3000/api/dialogflow',queryData,{headers: headers})
+>>>>>>> 959523183595d5f95159783a2192c14840bb2266
     .map(res => res.json());
   }
   

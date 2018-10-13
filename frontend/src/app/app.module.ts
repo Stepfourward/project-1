@@ -48,6 +48,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LinkedinPageProvider } from '../providers/linkedin-page/linkedin-page';
 import { Facebook } from '@ionic-native/facebook';
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -123,8 +124,13 @@ import { Facebook } from '@ionic-native/facebook';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     JobsDataProvider,
     JobActionsProvider,
+<<<<<<< HEAD
     File,FileChooser,Camera,InAppBrowser,
     LinkedinPageProvider,Facebook
+=======
+    File,FileChooser,Camera,InAppBrowser,Deeplinks,
+    LinkedinPageProvider,
+>>>>>>> 959523183595d5f95159783a2192c14840bb2266
     
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

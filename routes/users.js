@@ -13,7 +13,10 @@ const fljobList = require('../models/failedjoblist');
 const savedjobsList = require('../models/savedjobslist');
 const profiles = require('../models/profileData');
 const dialogflow = require('dialogflow');
+<<<<<<< HEAD
 //const reducerKeys = Object.keys(reducers); 
+=======
+>>>>>>> 959523183595d5f95159783a2192c14840bb2266
 
 var linkAddress = 'http://localhost:8100/#/reset/';
 
@@ -138,7 +141,7 @@ router.post('/authenticate', (req, res, next) => {
     User.comparePassword(password, user.password, (err, isMatch) => {
       if(err) throw err;
       if(isMatch){
-        const token = jwt.sign(user, config.secret, {
+        const token = jwt.sign(user.toJSON(), config.secret, {
           expiresIn: 604800 // 1 week
         });
 
@@ -379,10 +382,105 @@ router.delete('/register/:id', function(req,res) {
 
 // registering the linkedin user
 router.post('/linkedinuser', function(req,res) {
-  console.log('linkedin request')
-  User.findOne({linkedin_id: req.body.linkedin_id}, function(err,currentUser) {
+  console.log('Receiving linkedin data');
+  //const linkedin_id = req.body.linkedin_id;
+  User.findOne({linkedin_id: req.body.linkedin_id}, function(err, linkedinUser) {
     if(err) {
-      console.log('err in finding linkedin user '+ err);
+      console.log('err in finding linkedin user '+err);
+    }
+    // if user exits
+    else if(linkedinUser) {
+      console.log('user exist');
+      const token = jwt.sign(linkedinUser.toJSON(), config.secret, {expiresIn: 604800});
+      res.json({success: true, token: 'JWT '+token, user: {
+          id: linkedinUser._id,
+          linkedin_id: linkedinUser.linkedin_id,
+          name: linkedinUser.name,
+          username: linkedinUser.username,
+          email: linkedinUser.email,
+          lkprofilePic: linkedinUser.profilePic
+        }, msg: 'user exits'
+      });
+    }
+    // if user doesn't exist
+    else {
+      User.create({
+        linkedin_id: req.body.linkedin_id,
+        name: req.body.name,
+        username: req.body.username,
+        email: req.body.email,
+        lkprofilePic: req.body.lkprofilePic
+      }, function(err, result) {
+        if(err) {
+          res.json({success: false, msg: 'failed to add'})
+          console.log('error in adding the data '+err);
+        }
+        else if(result) {
+          console.log(typeof(result));
+          const token = jwt.sign(result.toJSON(),config.secret,{ expiresIn: 604800 });
+          res.json({success: true, token: 'JWT '+token, user: {
+            id: result._id,
+            linkedin_id: result.linkedin_id,
+            name: result.name,
+            username: result.username,
+            email: result.email,
+            lkprofilePic: result.profilePic
+          }, msg: 'User added '  });
+        }
+      });
+    }
+  });
+
+});
+
+//    dialoflow code
+router.post('/dialogflow', function(req,res) {
+  console.log('reached here');
+  const projectId = "stepfourward-7e702";
+  const LANGUAGE_CODE = 'en-US';
+  const sessionId = req.body.sessionId;
+  var query = req.body.query;
+
+  const sessionClient = new dialogflow.SessionsClient();
+  const sessionPath = sessionClient.sessionPath(projectId,sessionId);
+  const request = {
+    session: sessionPath,
+    queryInput: {
+      text: {
+        text: query,
+        languageCode: LANGUAGE_CODE,
+      },
+    },
+  };
+
+  sessionClient.detectIntent(request).then(response => {
+    console.log('intent detected');
+    const result = response[0].queryResult;
+    console.log(`  Query: ${result.queryText}`);
+    console.log(`  Response: ${result.fulfillmentText}`);
+
+    if(result.fulfillmentText) {
+      console.log(result.fulfillmentText);
+      return res.json({reply: result.fulfillmentText})
+    }
+    // if(result.intent) {
+    //   console.log(`  Intent: ${result.intent.displayName}`)
+    // }
+    else {
+      console.log('no intent found');
+    }
+  }).catch(err => {
+    console.log('error '+err);
+  })
+  
+})
+
+// facebook request ------------------------------------
+router.post('/facebookuser', function(req,res) {
+  console.log('facebook request');
+  User.findOne({linkedin_id: req.body.id}, function(err,currentUser) {
+    if(err) {
+      console.log('err in finding facebook user '+ err);
     }
     else if(currentUser) {
       console.log('user already exits');
@@ -399,11 +497,16 @@ router.post('/linkedinuser', function(req,res) {
     }
     else if(!currentUser) {
       User.create({
+<<<<<<< HEAD
         linkedin_id: req.body.linkedin_id,
         name: req.body.firstName,
+=======
+        linkedin_id: req.body.id,
+        name: req.body.first_name,
+>>>>>>> 959523183595d5f95159783a2192c14840bb2266
         username: req.body.username,
         email: req.body.email,
-        lkprofilePic: req.body.lkprofilePic
+        lkprofilePic: req.body.picture
       }, function(err,result) {
         if(err) {
            res.json({success: false, msg: 'failed to add'})
@@ -423,7 +526,6 @@ router.post('/linkedinuser', function(req,res) {
       });
     }
   });
-  
 });
 
 //    dialoflow code
@@ -511,6 +613,7 @@ router.post('/facebookuser', function(req,res) {
     }
   });
 });
+
 
 
 
