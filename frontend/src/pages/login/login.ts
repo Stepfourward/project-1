@@ -38,8 +38,12 @@ export class LoginPage implements OnInit {
     private authService:AuthService,public lc: NgZone,
     private formBuilder: FormBuilder,
     public alertCtrl: AlertController,
+
     public loadingCtrl: LoadingController,
     public jobs: JobsDataProvider, private toastCtrl: ToastController
+
+    public loadingCtrl: LoadingController
+
     ) {
       this.userForm = this.formBuilder.group({
         'username': ['', Validators.required],
@@ -96,6 +100,7 @@ export class LoginPage implements OnInit {
     password: this.password
     }
 
+
     if (this.userForm.dirty && this.userForm.valid) {
       this.authService.authenticateUser(user).subscribe(data => {
         if(data.success){
@@ -130,6 +135,42 @@ export class LoginPage implements OnInit {
       });
     }
    }
+
+  if (this.userForm.dirty && this.userForm.valid) {
+    this.authService.authenticateUser(user).subscribe(data => {
+      if(data.success){
+      this.authService.storeUserData(data.token, data.user);
+      this.toggleFlashMsgsVariable = true;
+      let loader = this.loadingCtrl.create({
+        content: "Logging in...",
+        duration: 1200
+      });
+      loader.present();
+      // this.flashMessage.show('You are now logged in', {
+      // cssClass: 'alert-success',
+      // timeout: 5000});
+      // this.router.navigate(['dashboard']);
+      //  this.toggleFlashMsgsVariable = false;
+      setTimeout(() => {
+        this.navCtrl.push(LocationPage, {
+            duration: 200, // The length in milliseconds the animation should take.
+        });
+      },1450);
+     // this.navCtrl.push(LocationPage);
+      } else {
+      this.toggleFlashMsgsVariable = true;
+      this.flashMessage.show(data.msg, {
+      cssClass: 'alert-danger',
+      timeout: 55000});
+      //      this.toggleFlashMsgsVariable = false;
+      // this.router.navigate(['login']);
+      this.ErrorMsgStatus = true;
+      return false;
+      }
+    });
+  }
+ }
+
  fp() {
   let prompt = this.alertCtrl.create({
     title: 'Reset Password',

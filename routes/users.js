@@ -13,10 +13,9 @@ const fljobList = require('../models/failedjoblist');
 const savedjobsList = require('../models/savedjobslist');
 const profiles = require('../models/profileData');
 const dialogflow = require('dialogflow');
-<<<<<<< HEAD
+
 //const reducerKeys = Object.keys(reducers); 
-=======
->>>>>>> 959523183595d5f95159783a2192c14840bb2266
+
 
 var linkAddress = 'http://localhost:8100/#/reset/';
 
@@ -50,7 +49,11 @@ router.post('/register', (req, res, next) => {
       });
 });
 
+
 /// Update User
+
+// Update User
+
 router.put('/update/:id', function(req, res, next) {
   let updatedUser = {};
   updatedUser.name = req.body.name;
@@ -64,7 +67,10 @@ router.put('/update/:id', function(req, res, next) {
 console.log('ReqData:::::',req);
 
 var id = req.params.id;
+
 console.log(id);
+
+
 User.findOne({_id: id}, function(err, foundObject){
   if(err) {
     console.log(err);
@@ -86,6 +92,7 @@ User.findOne({_id: id}, function(err, foundObject){
        })
     }
   }
+
 })
 
 
@@ -104,6 +111,34 @@ console.log(query,updatedUser);
 router.put('/user/:id', function(req, res){
   console.log(req.params.id);
 	User.findByIdAndUpdate({_id: req.params.id},
+
+})
+
+
+  let query = {_id:req.params.id};
+console.log(query,updatedUser);
+  User.update(query, updatedUser, function(err) {
+    if(err) {console.log(err);return;}
+    else { console.log('HipHip hurry sucess')}
+    
+  })
+  // let newUser = new User({
+  //   name: req.body.name,
+  //   email: req.body.email,
+  //   username: req.body.username,
+  //   phone:req.body.phone,
+  //   location:req.body.location,
+  //   title:req.body.title,
+  //   company:req.body.company,
+  //   education:req.body.education
+  // });
+  //var userId = req.body.userId;
+})
+
+
+router.put('/user/:id', function(req, res){
+	user.findByIdAndUpdate({_id: req.params.id},
+
 	                   {
                       name: req.body.name,
                       email: req.body.email,
@@ -116,14 +151,22 @@ router.put('/user/:id', function(req, res){
 			   }, function(err, docs){
 			 	if(err) res.json(err);
 				else
+
 				{
 
            res.json(docs);
            console.log(docs);
            //res.send(docs);
+
+				{ 
+				   console.log(docs);
+				   res.redirect('/user/'+req.params.id);
+
 				 }
 			 });
 });
+
+
 
 
 
@@ -497,13 +540,13 @@ router.post('/facebookuser', function(req,res) {
     }
     else if(!currentUser) {
       User.create({
-<<<<<<< HEAD
+
         linkedin_id: req.body.linkedin_id,
         name: req.body.firstName,
-=======
+
         linkedin_id: req.body.id,
         name: req.body.first_name,
->>>>>>> 959523183595d5f95159783a2192c14840bb2266
+
         username: req.body.username,
         email: req.body.email,
         lkprofilePic: req.body.picture

@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 // import { tokenNotExpired } from 'angular2-jwt';
+
 import 'rxjs/add/operator/take';
+
+
 
 @Injectable()
 export class AuthService {
@@ -38,7 +41,11 @@ export class AuthService {
     let headers = new Headers();
     console.log(headers,user);
     headers.append('Content-Type','application/json');
+
     return this.http.put('http://192.168.0.105:3000/api/user/' + user._id, user,{headers: headers})
+
+    return this.http.put('http://localhost:3000/users/update/:id', user,{headers: headers})
+
       .map(res => res.json());
   }
 
@@ -53,6 +60,7 @@ export class AuthService {
     this.authToken = token;
     this.user = user;
   }
+
   // for mail verification
   forgotpasswordMail(email) {
     console.log(email);
@@ -74,6 +82,7 @@ export class AuthService {
   //   return this.http.get('http://localhost:8100/api/reset/' + tokenData,{headers: headers})
   //   .map(res => res.json());
   // }
+
 
 
   loggedIn(){
@@ -112,17 +121,17 @@ export class AuthService {
     .map(res => res.json());
   }
 
-<<<<<<< HEAD
+
   dialogflow() {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.get('http://localhost:3000/api/dialogflow',{headers: headers})
-=======
+
   dialogflow(queryData) {
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://192.168.0.105:3000/api/dialogflow',queryData,{headers: headers})
->>>>>>> 959523183595d5f95159783a2192c14840bb2266
+
     .map(res => res.json());
   }
   

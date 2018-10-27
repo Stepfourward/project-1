@@ -56,9 +56,9 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     // this.rbar.open();
+    
    }
   goBack() {
-
   	this.navCtrl.pop();
   }
 
@@ -81,7 +81,9 @@ export class RegisterPage implements OnInit {
     }
     
    this.userDataService.getUserData(user);
+   console.log(user);
     if (this.userForm.dirty && this.userForm.valid) {
+      console.log('asd');
 // Required Fields
 if(!this.validateService.validateRegister(user)){
   this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 4000});

@@ -4,6 +4,7 @@ const config = require('../config/database');
 
 // User Schema
 const UserSchema = mongoose.Schema({
+
   name: {
     type: String
   },
@@ -65,6 +66,41 @@ const UserSchema = mongoose.Schema({
 });
 
   const User = module.exports = mongoose.model('User', UserSchema);
+
+    name: {
+      type: String
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    username: {
+      type: String,
+      required: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
+    phone: {
+      type: String
+    },
+    location: {
+      type: String
+    },
+    title:{
+      type: String
+    },
+    company:{
+      type: String
+    },
+    education:{
+      type: String
+    }
+  });
+  
+const User = module.exports = mongoose.model('User', UserSchema);
+
 
   module.exports.getUserById = function(id, callback){
     User.findById(id, callback);

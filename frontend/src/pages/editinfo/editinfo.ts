@@ -57,8 +57,13 @@ export class EditinfoPage implements OnInit {
     public userDataService: HandleUserDataService,
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder,
+
     //private file: File,
     //private fileChooser: FileChooser
+
+    private file: File,
+    private fileChooser: FileChooser
+
               ) {
       this.EditPageUserForm = this.formBuilder.group({
         'name': ['', Validators.required],
@@ -90,6 +95,7 @@ export class EditinfoPage implements OnInit {
       return false;
     });
 
+
     //this.file.checkDir(this.file.dataDirectory, 'mydir').then(_ => console.log('Directory exists')).catch(err => console.log('Directory doesn\'t exist'));
     
   }
@@ -99,6 +105,17 @@ export class EditinfoPage implements OnInit {
   //   .then(uri => console.log(uri))
   //   .catch(e => console.log(e));
   // }
+
+    this.file.checkDir(this.file.dataDirectory, 'mydir').then(_ => console.log('Directory exists')).catch(err => console.log('Directory doesn\'t exist'));
+    
+  }
+  
+  browseFile() {
+    this.fileChooser.open()
+    .then(uri => console.log(uri))
+    .catch(e => console.log(e));
+  }
+
 
   toSlides() {
   	this.navCtrl.push(SlidesPage);

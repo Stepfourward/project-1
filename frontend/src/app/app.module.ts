@@ -37,6 +37,7 @@ import { ControlMessagesComponent } from './control-messages.component';
 import { HandleUserDataService } from '../services/handleUserData.service';
 import { PolicyPage } from '../pages/policy/policy';
 import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
+
 import { JobsDataProvider } from '../providers/jobs-data/jobs-data';
 import { JobActionsProvider } from '../providers/job-actions/job-actions';
 import { File } from '@ionic-native/file';
@@ -47,6 +48,11 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 //import { Deeplinks } from '@ionic-native/deeplinks';
 import { LinkedinPageProvider } from '../providers/linkedin-page/linkedin-page';
 import { Facebook } from '@ionic-native/facebook';
+
+
+// import { AuthGuard } from './guards/auth.guard';
+import { File } from '@ionic-native/file';
+import { FileChooser } from '@ionic-native/file-chooser';
 
 
 @NgModule({
@@ -120,17 +126,20 @@ import { Facebook } from '@ionic-native/facebook';
     ValidateService,
     NativeGeocoder,
     AuthService,
+    File,
+    FileChooser,
+   // AuthGuard,
     ValidationService, 
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     JobsDataProvider,
     JobActionsProvider,
-<<<<<<< HEAD
+
     File,FileChooser,Camera,InAppBrowser,
     LinkedinPageProvider,Facebook
-=======
+
     File,FileChooser,Camera,InAppBrowser,Deeplinks,
     LinkedinPageProvider,
->>>>>>> 959523183595d5f95159783a2192c14840bb2266
+
     
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
