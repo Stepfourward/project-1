@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { HttpModule } from '@angular/http';
+import { HttpClient,HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { IonTextAvatar } from 'ionic-text-avatar';
 import { SwingModule } from 'angular2-swing';
 import { IonicSwipeAllModule } from 'ionic-swipe-all';
@@ -18,6 +19,7 @@ import { LoginPage } from '../pages/login/login';
 import { LocationPage } from '../pages/location/location';
 import { NotificationPage } from '../pages/notification/notification';
 import { EditinfoPage } from '../pages/editinfo/editinfo';
+import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { SlidesPage } from '../pages/slides/slides';
 import { JobPage } from '../pages/job/job';
 import { ChatBoxPage } from '../pages/chat-box/chat-box';
@@ -29,16 +31,29 @@ import { ModalPage } from '../pages/modal/modal';
 import { ValidateService } from '../services/validate.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
 import {AuthService} from '../services/auth.service';
-import { NgZone } from '@angular/core';
+//import { NgZone } from '@angular/core';
 import { ValidationService } from './validation.service';
 import { ControlMessagesComponent } from './control-messages.component';
 import { HandleUserDataService } from '../services/handleUserData.service';
-import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { PolicyPage } from '../pages/policy/policy';
 import { TermsofusagePage } from '../pages/termsofusage/termsofusage';
+
+import { JobsDataProvider } from '../providers/jobs-data/jobs-data';
+import { JobActionsProvider } from '../providers/job-actions/job-actions';
+import { File } from '@ionic-native/file';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Camera } from '@ionic-native/camera';
+//import { LinkedIn, LinkedInLoginScopes } from '@ionic-native/linkedin';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+//import { Deeplinks } from '@ionic-native/deeplinks';
+import { LinkedinPageProvider } from '../providers/linkedin-page/linkedin-page';
+import { Facebook } from '@ionic-native/facebook';
+
+
 // import { AuthGuard } from './guards/auth.guard';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
+
 
 @NgModule({
   declarations: [
@@ -61,7 +76,8 @@ import { FileChooser } from '@ionic-native/file-chooser';
     ControlMessagesComponent,
     ForgotPasswordPage,
     PolicyPage,
-    TermsofusagePage
+    TermsofusagePage,
+    
   ],
   imports: [ 
     FormsModule, 
@@ -72,8 +88,9 @@ import { FileChooser } from '@ionic-native/file-chooser';
     HttpModule,
     SwingModule,
     IonicSwipeAllModule,
+    HttpClientModule,
     
-    // IonicPageModule.forChild(RegisterPage)
+
    
     
 
@@ -97,7 +114,8 @@ import { FileChooser } from '@ionic-native/file-chooser';
     ModalPage,
     ForgotPasswordPage,
     PolicyPage,
-    TermsofusagePage 
+    TermsofusagePage ,
+    
   ],
   providers: [
     StatusBar,
@@ -112,8 +130,21 @@ import { FileChooser } from '@ionic-native/file-chooser';
     FileChooser,
    // AuthGuard,
     ValidationService, 
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    JobsDataProvider,
+    JobActionsProvider,
+
+    File,FileChooser,Camera,InAppBrowser,
+    LinkedinPageProvider,Facebook
+
+    File,FileChooser,Camera,InAppBrowser,Deeplinks,
+    LinkedinPageProvider,
+
+    
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class AppModule {}
+
+export class AppModule {
+  
+}

@@ -10,16 +10,20 @@
   </div>
  
   <div id="linklogo" text-center>
-    <button ion-button icon-only clear>
+    <button ion-button icon-only clear (click)="linkedinLogin()">
         <img id="linkimg" src="assets/imgs/linkedin1.png">
     </button>
+     <button ion-button icon-only clear (click)="loginWithFB()">
+      <img id= "fblinkimg" src="assets/imgs/facebook-sign-in-button.png">
+     </button>
   </div>
+  <!-- <div>
+    <button ion-button large (click)="facebookLogin()">
+      fb Login
+    </button>
+  </div> -->
   <div text-center class="desc2">
     I agree to the<u (click)="totermPage()" >Terms of usage</u> and <u (click)="toPolicypage()">Privacy Policy</u>
   </div>
-  
-  <button ion-button clear id="sign2" (click)="openRegisterPage()">Sign Up with Email</button>
-	
-
-
-</ion-content>
+<button ion-button clear id="sign2" (click)="openRegisterPage()">Sign Up with Email</button>
+	</ion-content>

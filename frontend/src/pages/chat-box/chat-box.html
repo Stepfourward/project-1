@@ -18,30 +18,27 @@
 
 <ion-content>
   <div style="font-size:10px; text-align:center;">7 minutes ago</div>
-  <ion-card>
-    <ion-card-content>
-        <div id="msg">
-          Extended kindness trifling remember he confined outlived if. Assistance sentiments yet unpleasing say. Open they an busy they my such high.
-        </div>
-    </ion-card-content>
-  </ion-card>
-
+  <ion-list no-lines class="msgbubble" *ngFor="let msg of messages">
+<<<<<<< HEAD
+    <!-- <div class="innermsg left" text-left *ngIf="userId != msg.id">
+=======
+    <div class="innermsg left" text-left *ngIf="userId != msg.id ">
+>>>>>>> 959523183595d5f95159783a2192c14840bb2266
+      {{ msg.reply }}
+    </div>
+    <div class="innermsg right" text-right *ngIf="userId == msg.id">
+        {{ msg.reply }}
+    </div> -->
+  </ion-list>
 </ion-content>
+
 <ion-footer>
   <ion-toolbar>
-    <ion-buttons left>
-      <button ion-button clear icon-only style="color: #3BABE3;">
-        <ion-icon name="ios-download-outline"></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-input placeholder="Type here" [(ngModel)]="question" type="text"></ion-input>
     <ion-buttons right>
-      <button ion-button clear icon-only style="color: #3BABE3;">
-        <ion-icon name="ios-send"></ion-icon>
+      <button ion-button clear icon-only id="sendicon" (click)="ask(question)">
+        <ion-icon name="send"></ion-icon>
       </button>
     </ion-buttons>
-    
-     <ion-textarea rows="1" fz-elastic placeholder="Message.."></ion-textarea>
-     
-    
   </ion-toolbar>
 </ion-footer>

@@ -9,7 +9,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidateService } from '../../services/validate.service';
 import { ValidationService } from '../../app/validation.service';
 import { ForgotPasswordPage } from '../forgot-password/forgot-password';
-@IonicPage()
+import { JobsDataProvider } from '../../providers/jobs-data/jobs-data';
+import { ToastController } from 'ionic-angular';
+@IonicPage({
+  name: 'login-page',
+  segment: 'login'
+})
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -25,7 +30,7 @@ export class LoginPage implements OnInit {
   ErrorMsgStatus: boolean = false;
    name1: any = '';
    name2: any = '';
-  
+
   // formgroup: FormGroup;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private validateService: ValidateService,
@@ -33,17 +38,22 @@ export class LoginPage implements OnInit {
     private authService:AuthService,public lc: NgZone,
     private formBuilder: FormBuilder,
     public alertCtrl: AlertController,
+
+    public loadingCtrl: LoadingController,
+    public jobs: JobsDataProvider, private toastCtrl: ToastController
+
     public loadingCtrl: LoadingController
+
     ) {
       this.userForm = this.formBuilder.group({
         'username': ['', Validators.required],
         'password': ['', [Validators.required, ValidationService.passwordValidator]]
-        
+
       });
 }
   ngOnInit() {
-   
-  } 
+
+  }
   clearErr(event) {
     this.ErrorMsgStatus = false;
     // private authService:AuthService,
@@ -90,6 +100,42 @@ export class LoginPage implements OnInit {
     password: this.password
     }
 
+
+    if (this.userForm.dirty && this.userForm.valid) {
+      this.authService.authenticateUser(user).subscribe(data => {
+        if(data.success){
+        this.authService.storeUserData(data.token, data.user);
+        this.toggleFlashMsgsVariable = true;
+        let loader = this.loadingCtrl.create({
+          content: "Logging in...",
+          duration: 1200
+        });
+        loader.present();
+        // this.flashMessage.show('You are now logged in', {
+        // cssClass: 'alert-success',
+        // timeout: 5000});
+        // this.router.navigate(['dashboard']);
+        //  this.toggleFlashMsgsVariable = false;
+        setTimeout(() => {
+          this.navCtrl.push(LocationPage, {
+              duration: 200, // The length in milliseconds the animation should take.
+          });
+        },1450);
+       // this.navCtrl.push(LocationPage);
+        } else {
+        this.toggleFlashMsgsVariable = true;
+        this.flashMessage.show(data.msg, {
+        cssClass: 'alert-danger',
+        timeout: 55000});
+        //      this.toggleFlashMsgsVariable = false;
+        // this.router.navigate(['login']);
+        this.ErrorMsgStatus = true;
+        return false;
+        }
+      });
+    }
+   }
+
   if (this.userForm.dirty && this.userForm.valid) {
     this.authService.authenticateUser(user).subscribe(data => {
       if(data.success){
@@ -124,6 +170,7 @@ export class LoginPage implements OnInit {
     });
   }
  }
+
  fp() {
   let prompt = this.alertCtrl.create({
     title: 'Reset Password',
@@ -132,6 +179,7 @@ export class LoginPage implements OnInit {
       {
         name: 'emailid',
         placeholder: 'email ID'
+
       },
     ],
     buttons: [
@@ -142,13 +190,54 @@ export class LoginPage implements OnInit {
         }
       },
       {
-        text: 'Reset',
+        text: 'OK',
         handler: data => {
-          this.navCtrl.push(ForgotPasswordPage);
+          this.emailVerify(data.emailid)
         }
       }
     ]
   });
   prompt.present();
 }
+
+  emailVerify(email) {
+    console.log(email);
+    this.authService.forgotpasswordMail(email).subscribe((data) => {
+      if(data.success) {
+        console.log(data.msg);
+        // const emailobj = {
+        //   emailid: email
+        // }
+        //this.navCtrl.push(ForgotPasswordPage);
+        let tempMsg = 'please check your email for verification'
+        this.popAlert(tempMsg);
+      }
+      else {
+        this.presentToast(data.msg);
+      }
+    })
+  }
+
+  presentToast(errMsg) {
+    let toast = this.toastCtrl.create({
+      message: errMsg,
+      duration: 3000,
+      position: 'top'
+    });
+
+    toast.onDidDismiss(() => {
+      //console.log('Dismissed toast');
+    });
+    toast.present();
+  }
+
+  // to show alerts
+  popAlert(tempMsg) {
+    let alert = this.alertCtrl.create({
+     title: 'ALERT',
+     subTitle: tempMsg,
+     buttons: ['Dismiss']
+   });
+   alert.present();
+ }
 }

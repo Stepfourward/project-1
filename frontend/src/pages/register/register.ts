@@ -12,12 +12,7 @@ import { HandleUserDataService } from '../../services/handleUserData.service';
  import { PolicyPage } from '../policy/policy';
 import { TermsofusagePage } from '../termsofusage/termsofusage';
 
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 @Injectable()
 @IonicPage({
   name: 'page-register',

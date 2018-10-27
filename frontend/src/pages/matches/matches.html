@@ -1,10 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons right>
-      <button ion-button clear icon-only id="srhbtn">
-        <ion-icon name="ios-search"></ion-icon>
+    <ion-buttons right *ngIf="searchbar else icononly">
+      <button ion-button clear icon-only id="srhbtn"  (click)="opensearchbar()">
+        <ion-icon name="ios-search" ></ion-icon>
       </button>
     </ion-buttons>
+    <ng-template #icononly>
+        <ion-searchbar text-center></ion-searchbar>
+    </ng-template>
   </ion-toolbar>
 </ion-header>
 

@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
-/**
- * Generated class for the JobDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { JobActionsProvider } from '../../providers/job-actions/job-actions';
 
 @IonicPage()
 @Component({
@@ -15,11 +10,26 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 })
 export class JobDetailPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController,private nativePageTransitions: NativePageTransitions) {
+  company: any;
+  jobtitle: any;
+  location: any;
+  jobtype: any;
+  jobDes: any;
+
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public actionSheetCtrl: ActionSheetController,
+    private nativePageTransitions: NativePageTransitions,
+    private joblist: JobActionsProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad JobDetailPage');
+    this.company = this.navParams.get('company');
+    this.jobtitle = this.navParams.get('jobtitle');
+    this.location = this.navParams.get('location');
+    this.jobtype = this.navParams.get('jobtype');
+    this.jobDes = this.navParams.get('jobdescrition');
   }
   moreOptions() {
 
@@ -29,7 +39,9 @@ export class JobDetailPage {
       buttons: [
         {
           text: 'Save Job',
-          
+          handler: () => {
+            this.savethejob();
+          }
         },
         {
           text: 'Share'
@@ -58,6 +70,31 @@ export class JobDetailPage {
     }
     this.nativePageTransitions.slide(options);
     this.navCtrl.pop();
+  }
+
+  //saving the job in db
+  savethejob() {
+    let jobdetails = {
+      company: this.company,
+      jobtitle: this.jobtitle,
+      location: this.location
+    }
+    this.joblist.addSavedjobList(jobdetails);
+  }
+
+  //to close page
+  cancelbtn() {
+    this.navCtrl.pop();
+  }
+
+  //apply job
+  applyjob() {
+    let applyjobdetails = {
+      company: this.company,
+      jobtitle: this.jobtitle,
+      location: this.location
+    }
+    this.joblist.addJobList(applyjobdetails);
   }
 
 }
